@@ -31,7 +31,7 @@ class WalletController extends Controller
         // 
         $tx_id = $data['tx_id'];
 
-        //校验$tx_id 格式
+        //校验$tx_id 格式 11
         if (!preg_match('/^[a-f0-9]{64}$/', $tx_id)) {
             return $this->fail('Invalid transaction number');
         }
