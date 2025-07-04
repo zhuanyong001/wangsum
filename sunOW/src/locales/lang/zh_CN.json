@@ -1,0 +1,241 @@
+{
+    "hello": "你好",
+    "welcome": "欢迎",
+    "index": {
+        "coinName": "DragonFly",
+        "big_title": "全球领先的聚合数字资产金融平台",
+        "sub_title": "DragonFly 是一个全球领先的集成数字资产金融平台。",
+        "btn_WHITEPAPER": "白皮书",
+        "btn_WHITEPAPER_url": "https://kkt.gitbook.io/untitled-1/",
+        "btn_DAPP": "DAPP"
+    },
+    "nav": {
+        "home_page": "首页",
+        "about_platform": "关于平台",
+        "contact_us": "联系我们",
+        "team_members": "团队成员",
+        "product_services": "产品服务",
+        "operating_principle": "运行原理",
+        "dgfy_token": "DGFY TOKEN",
+        "development_planning": "发展路线",
+        "cooperative_partner": "合作伙伴"
+    },
+    "footer": {
+        "system_description": "融合DeFi+RWA+CEX多元生态去中心化数字金融聚合系统",
+        "change_world": "改变金融世界 | 从DragonFly开始",
+        "email_copied": "邮箱已复制!"
+    },
+    "home": {
+        "platform_introduction": {
+            "title": "平台介绍",
+            "sub_title": "/Platform Introduction",
+            "text": "DragonFly 是一个融合 DeFi（去中心化金融）、RWA（现实世界资产） 和 DEX（去中心化交易所） 的创新型去中心化数字金融聚合平台，致力于让数字时代的财富红利普及到每个普通人。它不仅仅是一个金融工具，更是一个重新定义财富管理方式的生态系统。通过区块链技术和智能合约，用户将资金存入平台，可获得DGFY代币，并根据持有量分享分散的早期项目筹码，待这些项目在二级市场上线后享受高倍收益。这一模式不仅为用户打开了投资新窗口，还通过聚合资金助力平台发掘更多优质项目，同时为项目方带来广泛用户支持，架起传统资金进入Web3的桥梁，实现用户、平台与项目方的多方共赢。"
+        },
+        "business_scope": {
+            "title": "业务范围",
+            "sub_title": "/scope of business",
+            "text": "当前，业务覆盖美国、日本、韩国、越南、英国、尼日利亚、加纳、埃及、墨西哥、秘鲁、智利、巴西、中国等全球30多个国家，并逐步扩大中。未来，业务覆盖范围将扩展至全球每一个支持数字经济发展的国家。"
+        },
+        "digital_wealth_journey": {
+            "title": "参与DragonFly开启数字财富之旅",
+            "sub_title": "/Participate in DragonFly Embark on a journey of digital wealth",
+            "launch_button": "启动"
+        },
+        "participate": {
+            "title": "参与DragonFly开启数字财富之旅",
+            "sub_title": "/Participate in DragonFly Embark on a journey of digital wealth",
+            "launch": "启动"
+        },
+        "core_members": {
+            "title": "DragonFly核心成员",
+            "sub_title": "/Core members of DragonFly",
+            "text": "DragonFly 的团队由一群对金融科技和区块链深具热情的专业人士组成，他们的多样性和专业知识使我们的团队有能力面对和解决去中心化金融面临的各种挑战。",
+            "ceo": {
+                "name": "DragonFly CEO",
+                "subName": "Ivan Brightly",
+                "introduce": "金融科技专家，九年期货交易经验，香港大学与伦敦商学院工商管理硕士。活跃于香港金融科技界，担任多家初创企业及青年科技项目导师。"
+            },
+            "cto": {
+                "name": "DragonFly CTO",
+                "subName": "Evgeny Marchenkov",
+                "introduce": "区块链工程师，南加州大学工学硕士，十年以上C/C++开发经验，精通区块链技术和系统安全，多次在安全峰会发表演讲。"
+            },
+            "coo": {
+                "name": "DragonFly COO",
+                "subName": "Julie Coin",
+                "introduce": "20多年金融服务业经验，曾任E-Trade首席运营官及德意志银行财富管理全球COO，专注业务增长与战略，罗格斯大学学士及硕士学位。"
+            }
+        },
+        "product_service": {
+            "title": "产品服务",
+            "sub_title": "/Product Service",
+            "list": {
+                "staking": {
+                    "title": "质押挖矿",
+                    "content": "灵活存币，轻松收益。将您持有的加密货币质押在平台上，收益来源于区块网络维护和交易验证。质押什么币种，就赚取什么币种，资产始终为您增值。"
+                },
+                "liquidity_mining": {
+                    "title": "流动性挖矿",
+                    "content": "定期存币，让资产创造更多价值。将您的加密货币注入资金池，为去中心化交易所和借贷平台提供流动性，从中获得稳定的回报收益。质押的币种收益相同，收益一目了然。"
+                },
+                "interest_earning": {
+                    "title": "存币生息",
+                    "content": "双重回报，让您的存款增值更快！将加密货币存入平台，赚取该币种的利息，并额外获得蜻蜓代币奖励，助您财富增长更进一步。"
+                },
+                "digital_lending": {
+                    "title": "数字借贷",
+                    "content": "用资产换流动性，灵活周转更便捷！将您的加密货币作为抵押品，可借出高达其价值70%的资产，每日利息仅为1%。若质押币种价值低于借贷金额加利息，系统将自动清算以确保风险可控，轻松安全地释放资产潜能。"
+                }
+            }
+        },
+        "operating_principle": {
+            "title": "运行原理",
+            "sub_title": "/Operating principle",
+            "list": {
+                "decentralized_architecture": {
+                    "title": "去中心化架构",
+                    "content": "DragonFly采用区块链技术，建立去中心化金融生态。通过智能合约运行核心功能，实现高效、安全、透明的交易，免去传统金融中间环节的干扰。"
+                },
+                "automation_and_security": {
+                    "title": "自动化和安全性",
+                    "content": "所有交易和收益结算均通过智能合约自动执行，无需人工干预。平台采用多层安全防护机制，确保用户资产和数据安全。"
+                }
+            }
+        },
+        "reasons_to_choose": {
+            "title": "选择DragonFly的6大理由",
+            "sub_title": "/6 reasons to choose DragonFly",
+            "list": {
+                "diverse_defi_services": {
+                    "title": "多样化的DeFi服务",
+                    "content": "提供质押挖矿、流动性挖矿、存款和借贷四大核心功能，满足不同用户的金融需求，助力资产高效增值。"
+                },
+                "flexible_revenue_models": {
+                    "title": "灵活的收益模式",
+                    "content": "不论是质押还是存款，用户都能根据投入的币种直接获得相应的回报，部分产品还额外奖励蜻蜓代币，收益更具吸引力。"
+                },
+                "efficient_and_transparent": {
+                    "title": "高效透明的操作",
+                    "content": "借贷服务支持高达70%的抵押价值，自动化清算机制有效管理风险，确保操作透明、安全、便捷。"
+                },
+                "decentralized_advantage": {
+                    "title": "去中心化优势",
+                    "content": "利用区块链技术，为用户提供开放、公平且无需信任的金融生态，完全掌控个人资产。"
+                },
+                "flexible_asset_growth": {
+                    "title": "资产灵活增值",
+                    "content": "无论是通过网络验证赚取利息，还是为资金池提供流动性，DragonFly都能帮助用户将闲置加密货币转化为长期收益。"
+                },
+                "professional_security": {
+                    "title": "专业的安全保障",
+                    "content": "采用先进的智能合约技术，严格审计和风险控制体系，为用户资产保驾护航。"
+                }
+            }
+        },
+        "dgfy_token": {
+            "title": "DGFY TOKEN",
+            "description": "平台权益通证”DGFY”将是用户获取收益和参与投资产品的关键。通过参与 DragonFly平台，您不仅可以享受多样化的投资机会，还能通过 “DGFY”权益通证在平台生态系统中的广泛应用，实现资产的增值和稳定回报。",
+            "allocation_title": "分配方式：",
+            "list": [
+                {
+                    "title": "捐赠空投，线性解锁",
+                    "num": "20%",
+                    "color": "#FAC858"
+                },
+                {
+                    "title": "LP初始流通池",
+                    "num": "15%",
+                    "color": "#93BEFF"
+                },
+                {
+                    "title": "空投、市场营销",
+                    "num": "5%",
+                    "color": "#507AFC"
+                },
+                {
+                    "title": "流动性挖矿产出",
+                    "num": "54%",
+                    "color": "#9CC634"
+                },
+                {
+                    "title": "市场营销（产出随流动性挖矿同步解锁，无预留）",
+                    "num": "6%",
+                    "color": "#91CC75"
+                }
+            ],
+            "footer": [
+                {
+                    "label": "通证符号：",
+                    "value": "DGFY"
+                },
+                {
+                    "label": "总发行量：",
+                    "value": "10,000,000,000 (100亿枚)"
+                },
+                {
+                    "label": "买卖手续费：",
+                    "value": "1美元+0.2%"
+                },
+                {
+                    "label": "销毁机制：",
+                    "value": "每天自动销毁交易手续费代币"
+                }
+            ]
+        },
+        "mission_vision": {
+            "mission": {
+                "title": "使命",
+                "sub_title": "/Mission",
+                "text": "打造全球领先的去中心化金融生态系统，包括数字借贷、质押挖矿、存币生息、数字交易等。我们的目标不仅仅是让用户实现资产的存储和增值，更希望通过我们的服务，推动全球普惠金融，让每个人都能享受到公平、透明的金融服务，实现真正的金融自由。"
+            },
+            "vision": {
+                "title": "愿景",
+                "sub_title": "/Vision",
+                "text": "创造一个开放、公平、透明、无边界的金融世界。在这个世界中，任何人都可以自由地进行金融交易，无需担心繁琐的程序、高昂的费用或不公的规则。"
+            }
+        },
+        "development_planning": {
+            "title": "发展规划",
+            "sub_title": "/development planning",
+            "list": [
+                {
+                    "title": "阶段一：巩固核心功能生态",
+                    "content": [
+                        "▪︎ 提升质押挖矿、流动性挖矿、存款和借贷功能，确保操作便捷和收益稳定。",
+                        "▪︎ 强化区块链技术架构，保障高效、安全的用户体验。",
+                        "▪︎ 吸引流动性合作伙伴，扩大资金池规模与收益率。",
+                        "▪︎ 与主流去中心化交易所和借贷平台合作，提升资金池的规模和收益率。",
+                        "▪︎ 打通不同区块链间的资产交互，实现更多币种和协议的互通互操作。",
+                        "DragonFly采用区块链技术，建立去中心化金融生态。通过智能合约运行核心功能，实现高效、安全、透明的交易，免去传统金融中间环节的干扰。"
+                    ]
+                },
+                {
+                    "title": "阶段二：扩展用户与功能",
+                    "content": [
+                        "▪︎ 开展全球化推广，吸引多语言、多地区用户。",
+                        "▪︎ 推出多链资产支持和新型金融工具，如保险与衍生品。",
+                        "▪︎ 引入社区治理与激励机制，提升用户黏性与生态活跃度。",
+                        "▪︎ 开发入门教程和内容教育，帮助新用户了解去中心化金融的价值和使用方法。",
+                        "▪︎ 推行DAO（去中心化自治组织）治理模式，赋予用户更多平台决策权。"
+                    ]
+                },
+                {
+                    "title": "阶段三：跨链与智能化未来",
+                    "content": [
+                        "▪︎ 实现跨链资产互通，支持更多区块链协议和币种。",
+                        "▪︎ 引入AI优化资产管理策略，提供个性化服务。",
+                        "▪︎ 推行绿色区块链技术，构建可持续发展DeFi平台，迈向行业标杆。",
+                        "▪︎ 引入第三方开发者，开放平台API，促进生态内更多创新应用的诞生。",
+                        "▪︎ 引入AI技术，优化用户的收益策略，提供个性化理财建议。",
+                        "▪︎ 采用更高效的共识机制，降低能源消耗，构建可持续发展的DeFi生态。",
+                        "▪︎ 成为行业标杆，打造一个集安全、便捷、创新于一体的DeFi平台，成为用户信赖的金融服务首选。"
+                    ]
+                }
+            ]
+        },
+        "collaboration_partners": {
+            "title": "合作伙伴",
+            "sub_title": "/Collaboration partners"
+        }
+    }
+}

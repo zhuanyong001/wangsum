@@ -1,0 +1,47 @@
+.flex-row{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.flex-row-start{
+    display: flex;
+    align-items: center;
+}
+.flex-align{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.gradient-text{
+    background: radial-gradient( to Bottom, #FFFFFF, #CAFF33, #B4F438);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.img-fillet{
+    border-radius: 50%;
+    width: 2.08rem;
+    height: 2.08rem;
+}
+
+.example {
+    text-align: center;
+    background: rgba(0, 0, 0, 0.05);
+    padding: 1.25rem;
+}
+
+.single-line-omission{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.margin-right-20{
+    margin-right: 0.83rem;
+}
+
+.margin-bothSides-20{
+    margin-left: 1.67rem;
+    margin-right: 1.67rem;
+}

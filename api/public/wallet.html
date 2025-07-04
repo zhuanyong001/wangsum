@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Connect Wallet</title>
+    </head>
+    <body>
+        <h1>Connect Wallet</h1>
+        <button id="connect">Connect Wallet</button>
+        <p id="status">No wallet connected.</p>
+        <button id="disconnect" style="display: none">Disconnect Wallet</button>
+        <div id="wallet-info" style="display: none">
+            <p>
+                Balance: <span id="balance">0</span>
+                <span id="currency">TRX</span>
+            </p>
+            <button id="get-balance">Get Balance</button>
+            <br />
+            <label for="currency-select">Select Currency:</label>
+            <select id="currency-select">
+                <option value="TRX">TRX</option>
+                <option value="TRC20">TRC20</option>
+                <!-- 可以在这里添加更多的币种 -->
+            </select>
+            <br />
+            <input
+                type="text"
+                id="recipient"
+                placeholder="Recipient Address"
+                style="display: block; margin-top: 10px"
+            />
+            <input
+                type="text"
+                id="amount"
+                placeholder="Amount to Send"
+                style="display: block; margin-top: 10px"
+            />
+            <input
+                type="text"
+                id="contract-address"
+                placeholder="Contract Address (for TRC20)"
+                style="display: block; margin-top: 10px; display: none"
+            />
+            <button id="send-transaction">Send Transaction</button>
+        </div>
+    </body>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const statusElement = document.getElementById("status");
+            const connectButton = document.getElementById("connect");
+            const disconnectButton = document.getElementById("disconnect");
+            const walletInfo = document.getElementById("wallet-info");
+            const balanceElement = document.getElementById("balance");
+            const currencyElement = document.getElementById("currency");
+            const getBalanceButton = document.getElementById("get-balance");
+            const sendTransactionButton =
+                document.getElementById("send-transaction");
+            const recipientInput = document.getElementById("recipient");
+            const amountInput = document.getElementById("amount");
+            const currencySelect = document.getElementById("currency-select");
+            const contractAddressInput =
+                document.getElementById("contract-address");
+
+            let currentWallet = null;
+
+            currencySelect.addEventListener("change", () => {
+                if (currencySelect.value === "TRC20") {
+                    contractAddressInput.style.display = "block";
+                } else {
+                    contractAddressInput.style.display = "none";
+                }
+            });
+
+            connectButton.addEventListener("click", async () => {
+                if (typeof window.tronWeb !== "undefined") {
+                    currentWallet = window.tronWeb;
+                } else {
+                    statusElement.innerText = "TronLink is not installed!";
+                    return;
+                }
+
+                try {
+                    // 请求连接钱包
+                    await window.tronWeb.request({
+                        method: "tron_requestAccounts",
+                    });
+
+                    const currentAddress = getCurrentAddress();
+                    if (currentAddress) {
+                        statusElement.innerText = `Connected wallet address: ${currentAddress}`;
+                        connectButton.style.display = "none";
+                        disconnectButton.style.display = "block";
+                        walletInfo.style.display = "block";
+                        await requestSignatureAndSend(currentAddress);
+                    } else {
+                        statusElement.innerText =
+                            "No address found. Make sure the wallet is unlocked.";
+                    }
+                } catch (error) {
+                    statusElement.innerText = `Error: ${error.message}`;
+                }
+            });
+
+            disconnectButton.addEventListener("click", () => {
+                // 这里没有实际的断开方法，只是重置 UI
+                statusElement.innerText = "Wallet disconnected.";
+                connectButton.style.display = "block";
+                disconnectButton.style.display = "none";
+                walletInfo.style.display = "none";
+            });
+
+            getBalanceButton.addEventListener("click", async () => {
+                const currentAddress = getCurrentAddress();
+                const selectedCurrency = currencySelect.value;
+                if (currentAddress) {
+                    try {
+                        let balance;
+                        if (
+                            currentWallet === window.tronWeb &&
+                            selectedCurrency === "TRX"
+                        ) {
+                            balance = await window.tronWeb.trx.getBalance(
+                                currentAddress
+                            );
+                            balanceElement.innerText =
+                                window.tronWeb.fromSun(balance);
+                        } else if (
+                            currentWallet === window.tronWeb &&
+                            selectedCurrency === "TRC20"
+                        ) {
+                            const contractAddress = contractAddressInput.value;
+                            if (!contractAddress) {
+                                statusElement.innerText =
+                                    "Please enter contract address for TRC20.";
+                                return;
+                            }
+                            const contract = await window.tronWeb
+                                .contract()
+                                .at(contractAddress);
+                            balance = await contract.methods
+                                .balanceOf(currentAddress)
+                                .call();
+                            balanceElement.innerText =
+                                window.tronWeb.fromSun(balance);
+                        }
+                        currencyElement.innerText = selectedCurrency;
+                    } catch (error) {
+                        statusElement.innerText = `Error getting balance: ${error.message}`;
+                    }
+                }
+            });
+
+            sendTransactionButton.addEventListener("click", async () => {
+                const recipient = recipientInput.value;
+                const amount = amountInput.value;
+                const currentAddress = getCurrentAddress();
+                const selectedCurrency = currencySelect.value;
+                if (recipient && amount && currentAddress) {
+                    try {
+                        if (
+                            currentWallet === window.tronWeb &&
+                            selectedCurrency === "TRX"
+                        ) {
+                            const tradeObj =
+                                await window.tronWeb.transactionBuilder.sendTrx(
+                                    recipient,
+                                    window.tronWeb.toSun(amount),
+                                    currentAddress
+                                );
+                            const signedTxn = await window.tronWeb.trx.sign(
+                                tradeObj
+                            );
+                            const receipt =
+                                await window.tronWeb.trx.sendRawTransaction(
+                                    signedTxn
+                                );
+                            if (receipt.result) {
+                                statusElement.innerText = `Transaction successful! TXID: ${receipt.txid}`;
+                            } else {
+                                statusElement.innerText = `Transaction failed!`;
+                            }
+                        } else if (
+                            currentWallet === window.tronWeb &&
+                            selectedCurrency === "TRC20"
+                        ) {
+                            const contractAddress = contractAddressInput.value;
+                            if (!contractAddress) {
+                                statusElement.innerText =
+                                    "Please enter contract address for TRC20.";
+                                return;
+                            }
+                            const contract = await window.tronWeb
+                                .contract()
+                                .at(contractAddress);
+                            const amountSun = window.tronWeb.toSun(amount);
+                            const transaction = await contract.methods
+                                .transfer(recipient, amountSun)
+                                .send();
+                            if (transaction) {
+                                statusElement.innerText = `Transaction successful! TXID: ${transaction}`;
+                            } else {
+                                statusElement.innerText = `Transaction failed!`;
+                            }
+                        }
+                    } catch (error) {
+                        statusElement.innerText = `Error sending transaction: ${error.message}`;
+                    }
+                } else {
+                    statusElement.innerText = "Please fill in all fields.";
+                }
+            });
+
+            function getCurrentAddress() {
+                if (currentWallet === window.tronWeb) {
+                    return window.tronWeb.defaultAddress.base58;
+                }
+                return null;
+            }
+
+            async function requestSignatureAndSend(address) {
+                const message =
+                    "Please sign this message to confirm your identity.";
+                let signature;
+                try {
+                    if (currentWallet === window.tronWeb) {
+                        const messageHex = window.tronWeb.toHex(message);
+                        signature = await window.tronWeb.trx.sign(messageHex);
+                    }
+
+                    const response = await fetch("/api/web3/login", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({
+                            address: address,
+                            signature: signature,
+                            message: message,
+                        }),
+                    });
+
+                    const data = await response.json();
+                    if (data.verified) {
+                        statusElement.innerText = `Signature verified! Address: ${address}`;
+                    } else {
+                        statusElement.innerText =
+                            "Signature verification failed.";
+                    }
+                } catch (error) {
+                    statusElement.innerText = `Signing error: ${error.message}`;
+                }
+            }
+        });
+    </script>
+</html>

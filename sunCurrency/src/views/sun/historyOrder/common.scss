@@ -1,0 +1,106 @@
+.tabs-content-item{
+    margin: 0.875rem 0;
+}
+
+
+.PoolItem {
+    margin-bottom: 0.83rem;
+    @include box-box;
+    &-top {
+        @include border-direction;
+        .av-group {
+            display: flex;
+            gap: 0.5rem;
+
+            .avatar {
+                width: 2.08rem;
+                height: 2.08rem;
+                border-radius: 50%;
+                object-fit: cover;
+                border: none;
+                position: relative;
+                transition: margin-left 0.3s;
+
+                &:not(:first-child) {
+                    margin-left: -1.2rem;
+                    /* Adjust this value to control overlap */
+                    z-index: 0;
+                }
+            }
+
+            &:hover .avatar {
+                margin-left: 0 !important;
+            }
+        }
+
+        .name {
+            color: var(--textColor);
+            font-size: 1.17rem;
+            margin-left: 0.58rem;
+            margin-right: auto;
+            font-weight: 600;
+        }
+
+        .tag-group {
+            .tag {
+                padding: 0.15rem 1rem;
+                border-radius: 1.125rem;
+                font-size: 1.08rem;
+
+                &:not(:last-child) {
+                    margin-right: 0.42rem;
+                }
+            }
+
+            .tag1 {
+                color: #37b6ad;
+                background: #485170;
+            }
+
+            .tag2 {
+                color: #f7871e;
+                background: #5f4f5a;
+            }
+
+            .tag3 {
+                padding: 0.1rem 1rem;
+                @include metal-color;
+            }
+        }
+    }
+
+    &-middle {
+        margin-top: 1.67rem;
+        //background-image: url('/src/assets/images/Failed@2x.png');
+        background-repeat: no-repeat;
+        background-size: 6.67rem 5.92rem;
+        background-position: center;
+        @include flex-column-gap;
+        &-tb {
+            width: 100%;
+            font-size: 1.17rem;
+            margin-bottom: 0.42rem;
+
+            .title {
+                color: var(--textColor2);
+            }
+
+            .num {
+                color: var(--textColor);
+            }
+        }
+    }
+
+    &-bottom {
+        display: flex;
+        justify-content: center;
+        margin-top: 1.67rem;
+
+        .onbtn {
+            font-size: 1.2rem;
+            width: 100%;
+            color: var(--textColor);
+            background: var(--btnColor);
+        }
+    }
+}

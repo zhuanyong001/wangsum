@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<button onclick="connect()">connect</button>
+<br>
+转帐 <input id="amount">trx 到: <input id="toAddress">
+<br>
+<!--<button onclick="getTronweb()">test</button>-->
+<button onclick="clicked()">转帐</button>
+<script>
+    function clicked() {
+        const amount = document.getElementById("amount").value
+        const toAddress = document.getElementById("toAddress").value
+        transfer(amount, toAddress)
+            .catch(alert)
+    }
+
+    async function connect() {
+        const r = await window.tronLink.request({
+            method: "tron_requestAccounts"
+        })
+        console.log(r)
+    }
+
+    async function transfer(amount, to) {
+        if (!(window.tronWeb && window.tronWeb.defaultAddress.base58)) {
+            throw new Error("请先连接钱包")
+        }
+
+        const tronWeb = window.tronWeb
+
+        const trx = tronWeb.toSun(amount) // 单位转换
+        const from = tronWeb.defaultAddress.base58
+        const tx = await tronWeb.transactionBuilder.sendTrx(to, trx, from)
+        // document.write("转帐中请稍候...")
+        const signedTx = await tronWeb.trx.sign(tx)
+        const broastTx = await tronWeb.trx.sendRawTransaction(signedTx)
+        console.log(broastTx)
+        // document.write(`交易id: ${JSON.stringify(broastTx)}`)
+        document.write(`交易id: ${broastTx.txid}`)
+    }
+
+    function getTronweb() {
+        var obj = setInterval(async () => {
+            if (window.tronWeb && window.tronWeb.defaultAddress.base58) {
+                clearInterval(obj)
+                document.write("Yes, catch it:", window.tronWeb.defaultAddress.base58)
+            }
+        }, 10)
+    }
+
+</script>
+</body>
+</html>

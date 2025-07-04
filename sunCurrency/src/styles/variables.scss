@@ -1,0 +1,180 @@
+/* 主题色设置 */
+@use './common.scss' as *;
+$themes: (
+  dark: (
+    bgColor: #1D132E,
+    bgColor2: #403858,
+    textColor: #FFFFFF,
+    textColor2: #7A758B
+  ),
+  light:(
+    bgColor: #1D132E,
+    bgColor2: #403858,
+    textColor: #FFFFFF,
+    textColor2: #7A758B
+  )
+);
+
+$curTheme: 'dark';
+
+@mixin useTheme() {
+  @each $key, $val in $themes {
+    $curTheme: $key !global;
+    html[data-theme='#{$key}'] & {
+      @content;
+    }
+  }
+}
+
+@function getVar($paramsName) {
+  $themeMap: map-get($themes, $curTheme);
+  @return map-get($themeMap, $paramsName);
+}
+
+
+
+/* 媒体查询 */
+$breakPoints: (
+  phone: (320px, 480px),
+  pad: (481px)
+);
+
+@mixin responseTo($breakname) {
+  $bp: map-get($breakPoints, $breakname);
+  @if type-of($bp) == 'list' {
+    @media (min-width: nth($bp, 1)) and (max-width: nth($bp, 2)) {
+      @content;
+    }
+  } @else {
+    @media (min-width: $bp) {
+      @content;
+    }
+  }
+}
+
+
+.sun-a-number-input {
+  width: 100%;
+  @include metal-color;
+  border-radius: 0.58rem;
+  border-radius: 4rem;
+  height: 4rem;
+  font-size: 1.25rem;
+
+  &::placeholder {
+    color: var(--textColor2);
+  }
+  :deep(input) {
+    color: var(--textColor);
+    height: 100%;
+    &::placeholder {
+      color: var(--textColor2);
+    }
+  }
+  :deep(.ant-input-number){
+    width: 100%;
+    height: 100%;
+  }
+  :deep(.ant-input-number-group-wrapper){
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+  }
+  :deep(.ant-input-number-group-addon) {
+    border: none;
+  }
+  :deep(.ant-input-number-input-wrap){
+    display: flex;
+    align-items: center;
+    height: 100%;
+  }
+  .addonAfter {
+    border: none;
+    font-weight: 600;
+    color: var(--textColor);
+    font-size: 1.25rem;
+  }
+}
+
+.sun-a-number-input-square {
+  border-radius: 1rem;
+  .addonAfter{
+    background: radial-gradient( to Bottom, #FFFFFF, #CAFF33, #B4F438);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+}
+.sun-switch{
+  @include box-box();
+  border-radius: 0.6rem;
+  padding:0;
+  $height:1.6rem;
+  height: $height + 0.5rem;
+  width: 4.8rem;
+  .van-switch__node{
+    width: 2.4rem;
+    height: $height;
+    background: #e2e3e7;
+    border-radius: 0.3rem;
+    &::before {
+      content: '';
+      position: absolute;
+      top: 50%; /* 垂直居中 */
+      left: 50%; /* 中间位置 */
+      transform: translate(-50%, -50%); /* 确保伪元素完全居中 */
+      width: 0.3rem; /* 中间竖线宽度 */
+      height: 50%; /* 竖线高度 */
+      background: #fff; /* 中间竖线颜色 */
+      border-radius: 0.3rem;
+      /* 使用 box-shadow 添加左右竖线 */
+      box-shadow: 
+        -0.6rem 0 0 0 #fff, /* 左侧竖线 */
+        0.6rem 0 0 0 #fff;  /* 右侧竖线 */
+    }
+  }
+}
+.van-switch--on .van-switch__node{
+  @include colour-background;
+  &::before {
+    content: '';
+    background: #333;
+    box-shadow: 
+      -0.6rem 0 0 0 #333,
+      0.6rem 0 0 0 #333;
+  }
+}
+.van-notice-bar{
+  border-radius: 1.67rem;
+  @include metal-color;
+  :deep(.van-notice-bar__left-icon){
+    color: var(--textColor3);
+    font-weight: 600;
+  }
+}
+
+.ant-form-item-control-input-content .van-cell--clickable{
+  @include metal-color;
+  border-radius: 1rem;
+}
+
+
+.sun-btn{
+  button{
+    color: var(--textColor4) !important;
+    font-weight: 900;
+  }
+}
+
+.van-picker{
+  @include metal-color;
+}
+
+
+.ant-dropdown-menu{
+  @include box-box;
+  color: var(--textColor) !important;
+  .ant-dropdown-menu-item{
+    color: var(--textColor) !important;
+  }
+}

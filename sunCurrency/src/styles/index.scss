@@ -1,0 +1,60 @@
+@import './variables.scss';
+@import './reset.scss';
+@import './transition.scss';
+@import './atom.css';
+:root {
+  --bgColor: #0A0A0A;
+  --bgColor2: #403858;
+  --bgColor3: linear-gradient( 225deg, #242928 0%, #0D1114 100%);;
+  --btnColor:#FFFFFF;
+  --textColor: #FFFFFF;
+  --textColor2: #999999;
+  --textColor3: #9CC634;
+  --textColor30: #BAFE03;
+  --textColor4: #000000;
+  --borderColor: #4A425D;
+  --nav-top-height:4rem;
+  --tabbar-bottom-height:85px;
+}
+:root:root {
+  --van-text-color:var(--textColor);
+  --van-notice-bar-text-color:var(--textColor);
+  --van-notice-bar-background:var(--bgColor3);
+  --van-button-default-color:var(--textColor2);
+  --van-switch-on-background:var(--bgColor3);
+  --van-picker-background:var(--bgColor3);
+  --van-picker-mask-color:var(--bgColor);
+  --van-picker-option-text-color:var(--textColor);
+  --van-picker-group-background:var(--bgColor);
+  --van-tabs-nav-background:var(--bgColor);
+  --van-primary-color:var(--textColor30);
+  --van-dialog-background:var(--bgColor2);
+}
+body {
+  // --uno-apply: c-[--app-body-text-color] bg-[--app-body-bg-color] font-[--app-font-family];
+  font-family: Lexend, Lexend;
+  color: var(--textColor);
+  background-color: var(--bgColor);
+  position: relative;
+  @include useTheme {
+    background-color: getVar('bgColor');
+  }
+  @include responseTo('phone') {
+    width: 100%;
+  }
+  @include responseTo('pad') {
+    width: 481px;
+    margin: 0 auto;
+  }
+}
+html {
+  @include responseTo('phone') {
+    font-size: 12px;
+  }
+}
+
+.after-dollar-icon{
+  &::before{
+    content: "$";
+  }
+}

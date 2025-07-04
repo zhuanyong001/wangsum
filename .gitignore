@@ -1,0 +1,11 @@
+sunCurrency/dist
+sunCurrency/.vscode
+sunCurrency/node_modules
+
+admin/dist
+admin/node_modules
+
+sunOW/node_modules
+sunOW/.vscode
+sunOW/dist
+sunOW/public/video

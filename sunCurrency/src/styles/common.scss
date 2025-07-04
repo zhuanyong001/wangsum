@@ -1,0 +1,102 @@
+@mixin box-box(){
+  padding: 1.25rem 1.25rem;
+  box-sizing: border-box;
+  border-radius: 2rem;
+  background-image: linear-gradient( 225deg, #242928 0%, #0D1114 100%);
+  border: 0.1rem solid transparent;
+  // filter: drop-shadow(0.12rem 0 0.08rem rgba(255, 255, 255, 1));
+  background-clip: padding-box;
+  -webkit-background-clip: padding-box;
+  @content
+};
+
+@mixin colour-background($angle:270deg){
+  background: linear-gradient( $angle, #DBF95C 0%, #9CF021 100%);
+};
+
+@mixin colour-background-2(){
+  background: linear-gradient( 180deg, #A0FF05 0%, #C5D503 100%);
+}
+
+@mixin border-direction($direction: bottom, $padding: 2.25rem, $thickness: 0.1rem) {
+	border-#{$direction}: $thickness solid rgba(255,255,255,0.2);
+  padding-#{$direction}: $padding;
+};
+
+@mixin metal-color(){
+  background: linear-gradient( 225deg, #161A19 0%, #020303 100%);
+  color: var(--textColor);
+  border: 1px solid transparent;
+  filter: drop-shadow(0rem 0rem 1rem rgba(255, 255, 255, 1));
+  border-image: linear-gradient(90deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1), rgba(255, 255, 255, 0))  1 1/ 2 / 1;
+  font-size: 1.25rem;
+  -webkit-mask-image: radial-gradient(circle, #000 98%, transparent 100%);
+  mask-image: radial-gradient(circle, #000 98%, transparent 100%);
+  -webkit-mask-composite: intersect;
+  mask-composite: intersect;
+};
+
+@mixin flex-column-gap($gap: 1.25rem){
+  display: flex;
+  flex-direction: column;
+  gap: $gap;
+}
+
+
+@mixin dragonfly-background($showFirstImage: true, $showSecondImage: true) {
+  @if $showFirstImage and $showSecondImage {
+    background-image: url('@/assets/images/dragonflyLattice.png'), url('@/assets/images/bottomLattice.png');
+    background-position: calc(100%) 0, 100% 100%;
+    background-size: 60% auto, 100% auto;
+  } @else if $showFirstImage {
+    background-image: url('@/assets/images/dragonflyLattice.png');
+    background-position: calc(100%) 0;
+    background-size: 60% auto;
+  } @else if $showSecondImage {
+    background-image: url('@/assets/images/bottomLattice.png');
+    background-position: 100% 100%;
+    background-size: 100% auto;
+  } @else {
+    background-image: none;
+  }
+
+  background-repeat: no-repeat;
+  object-fit: fill;
+}
+
+
+@mixin diagonal-background(){
+  background-image: url('@/assets/images/Diagonallattice.png');
+  background-position: calc(100%) 0;
+  background-size: 100% auto;
+  background-repeat: no-repeat;
+  object-fit: fill;
+}
+
+@mixin greenL-background(){
+  background-image: url('@/assets/images/greenLattice.png');
+  background-position: calc(100%) 0;
+  background-size: 60% auto;
+  background-repeat: no-repeat;
+  object-fit: fill;
+}
+
+@mixin leftBottom-background($size:100%){
+  background-image: url('@/assets/images/smallLattice.png');
+  background-size: fill;
+  background-repeat: no-repeat;
+  background-position: 100% 0;
+  background-size: $size auto;
+}
+
+@mixin abl-list($top: var(--nav-top-height),$bottom:var(--tabbar-bottom-height)){
+  position: absolute;
+  width: calc(100% - 3.3rem);
+  left: 50%;
+  transform: translate(-50%);
+  top: $top;
+  overflow-y:auto;
+  height: calc(100vh - #{$top});
+  padding-bottom: $bottom;
+  z-index: 0;
+}

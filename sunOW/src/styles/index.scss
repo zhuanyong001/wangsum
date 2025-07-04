@@ -1,0 +1,44 @@
+@mixin flex-row($gap){
+    display: flex;
+    align-items: center;
+    column-gap: $gap;
+}
+
+@mixin flex-col($gap){
+    display: flex;
+    flex-direction: column;
+    row-gap: $gap;
+}
+
+@mixin metal-color(){
+    background: linear-gradient( 225deg, #161A19 0%, #020303 100%);
+    color: var(--textColor);
+    border: 1px solid transparent;
+    filter: drop-shadow(0rem 0rem 1rem rgba(255, 255, 255, 1));
+    border-image: linear-gradient(90deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1), rgba(255, 255, 255, 0))  1 1/ 2 / 1;
+    -webkit-mask-image: radial-gradient(circle, #000 98%, transparent 100%);
+    mask-image: radial-gradient(circle, #000 98%, transparent 100%);
+    -webkit-mask-composite: intersect;
+    mask-composite: intersect;
+};
+
+
+
+/* 媒体查询 */
+$breakPoints: (
+  mobile: (0px, 1249.9px),
+  web: (1250px)
+);
+
+@mixin responseTo($breakname) {
+  $bp: map-get($breakPoints, $breakname);
+  @if type-of($bp) == 'list' {
+    @media (min-width: nth($bp, 1)) and (max-width: nth($bp, 2)) {
+      @content;
+    }
+  } @else {
+    @media (min-width: $bp) {
+      @content;
+    }
+  }
+}

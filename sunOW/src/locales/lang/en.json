@@ -1,0 +1,241 @@
+{
+    "hello": "Hello",
+    "welcome": "Welcome",
+    "index": {
+        "coinName": "DragonFly",
+        "big_title": "Global Leading Aggregated Digital Asset Financial Platform",
+        "sub_title": "DragonFly is a globally leading integrated digital asset financial platform.",
+        "btn_WHITEPAPER": "Whitepaper",
+        "btn_WHITEPAPER_url": "https://kkt.gitbook.io/ying-wen-ban-bai-pi-shu/",
+        "btn_DAPP": "DAPP"
+    },
+    "nav": {
+        "home_page": "Home",
+        "about_platform": "About Platform",
+        "contact_us": "Contact Us",
+        "team_members": "Team Members",
+        "product_services": "Product Services",
+        "operating_principle": "Operating Principle",
+        "dgfy_token": "DGFY TOKEN",
+        "development_planning": "Development Planning",
+        "cooperative_partner": "Collaboration Partners"
+    },
+    "footer": {
+        "system_description": "A decentralized digital financial aggregation system integrating DeFi+RWA+CEX diverse ecosystems",
+        "change_world": "Change the financial world | Starting from DragonFly",
+        "email_copied": "Email copied!"
+    },
+    "home": {
+        "platform_introduction": {
+            "title": "Platform Introduction",
+            "sub_title": "/Platform Introduction",
+            "text": "DragonFly aims to disrupt traditional financial models with a decentralized super financial ecosystem, addressing various issues in centralized financial systems such as high transaction costs, low efficiency, lack of transparency, and the inability to achieve financial inclusion globally. Through the independently developed 'Asset Link' system, it provides global investors with financial services like staking mining, liquidity mining, coin storage interest, and digital lending, allowing every user to enjoy the dividends of the digital age. In the DragonFly ecosystem, anyone can access and use financial services without intermediaries. This decentralized approach not only significantly reduces costs and improves efficiency but also makes financial services more fair and accessible."
+        },
+        "business_scope": {
+            "title": "Business Scope",
+            "sub_title": "/Scope of Business",
+            "text": "Currently, our business covers over 30 countries worldwide, including the United States, Japan, South Korea, Vietnam, the United Kingdom, Nigeria, Ghana, Egypt, Mexico, Peru, Chile, Brazil, and China, and is gradually expanding. In the future, the business scope will extend to every country worldwide that supports the development of the digital economy."
+        },
+        "digital_wealth_journey": {
+            "title": "Participate in DragonFly to Embark on a Journey of Digital Wealth",
+            "sub_title": "/Participate in DragonFly Embark on a journey of digital wealth",
+            "launch_button": "Launch"
+        },
+        "participate": {
+            "title": "Participate in DragonFly to Embark on a Journey of Digital Wealth",
+            "sub_title": "/Participate in DragonFly Embark on a journey of digital wealth",
+            "launch": "Launch"
+        },
+        "core_members": {
+            "title": "DragonFly Core Members",
+            "sub_title": "/Core Members of DragonFly",
+            "text": "DragonFly aims to disrupt traditional financial models with a decentralized super financial ecosystem, addressing various issues in centralized financial systems such as high transaction costs, low efficiency, lack of transparency, and the inability to achieve financial inclusion globally. Through the independently developed 'Asset Link' system, it provides global investors with financial services like staking mining, liquidity mining, coin storage interest, and digital lending, allowing every user to enjoy the dividends of the digital age. In the DragonFly ecosystem, anyone can access and use financial services without intermediaries. This decentralized approach not only significantly reduces costs and improves efficiency but also makes financial services more fair and accessible.",
+            "ceo": {
+                "name": "DragonFly CEO",
+                "subName": "Ivan Brightly",
+                "introduce": "Fintech expert with nine years of experience in futures trading, MBA from the University of Hong Kong and London Business School. Active in Hong Kong's fintech industry, serving as a mentor for several startups and youth tech projects."
+            },
+            "cto": {
+                "name": "DragonFly CTO",
+                "subName": "Evgeny Marchenkov",
+                "introduce": "Blockchain engineer with a Master's in Engineering from the University of Southern California and over ten years of C/C++ development experience. Proficient in blockchain technology and system security, has delivered speeches at multiple security summits."
+            },
+            "coo": {
+                "name": "DragonFly COO",
+                "subName": "Julie Coin",
+                "introduce": "Over 20 years of experience in the financial services industry, former COO of E-Trade and Global COO of Deutsche Bank Wealth Management. Focused on business growth and strategy, holding Bachelor's and Master's degrees from Rutgers University."
+            }
+        },
+        "product_service": {
+            "title": "Product Services",
+            "sub_title": "/Product Service",
+            "list": {
+                "staking": {
+                    "title": "Staking Mining",
+                    "content": "Flexible coin storage, easy profits. Stake your cryptocurrencies on the platform, with earnings derived from blockchain network maintenance and transaction validation. Earn the same type of coins you stake, ensuring your assets always appreciate."
+                },
+                "liquidity_mining": {
+                    "title": "Liquidity Mining",
+                    "content": "Regular coin deposits to create more value for your assets. Inject your cryptocurrencies into liquidity pools, providing liquidity for decentralized exchanges and lending platforms, earning stable returns. The earnings for staked coins are consistent and transparent."
+                },
+                "interest_earning": {
+                    "title": "Interest Earning",
+                    "content": "Double returns, faster asset growth! Deposit your cryptocurrencies on the platform to earn interest in that coin, and additionally receive DragonFly token rewards, further enhancing your wealth growth."
+                },
+                "digital_lending": {
+                    "title": "Digital Lending",
+                    "content": "Exchange assets for liquidity, enabling flexible and convenient turnover! Use your cryptocurrencies as collateral to borrow up to 70% of their value, with a daily interest rate of only 1%. If the value of the staked coins falls below the loan amount plus interest, the system will automatically liquidate to ensure risk control, safely and easily releasing asset potential."
+                }
+            }
+        },
+        "operating_principle": {
+            "title": "Operating Principle",
+            "sub_title": "/Operating Principle",
+            "list": {
+                "decentralized_architecture": {
+                    "title": "Decentralized Architecture",
+                    "content": "DragonFly utilizes blockchain technology to establish a decentralized financial ecosystem. Through smart contracts, it operates core functionalities, enabling efficient, secure, and transparent transactions, eliminating interference from traditional financial intermediaries."
+                },
+                "automation_and_security": {
+                    "title": "Automation and Security",
+                    "content": "All transactions and earnings settlements are executed automatically via smart contracts, eliminating the need for manual intervention. The platform employs multi-layer security mechanisms to ensure the safety of user assets and data."
+                }
+            }
+        },
+        "reasons_to_choose": {
+            "title": "6 Reasons to Choose DragonFly",
+            "sub_title": "/6 reasons to choose DragonFly",
+            "list": {
+                "diverse_defi_services": {
+                    "title": "Diverse DeFi Services",
+                    "content": "Provide four core functions: staking mining, liquidity mining, deposits, and lending, meeting different users' financial needs and facilitating efficient asset growth."
+                },
+                "flexible_revenue_models": {
+                    "title": "Flexible Revenue Models",
+                    "content": "Whether staking or depositing, users can directly earn corresponding returns based on the coins they invest. Some products also offer additional DragonFly token rewards, making the returns more attractive."
+                },
+                "efficient_and_transparent": {
+                    "title": "Efficient and Transparent Operations",
+                    "content": "Lending services support collateral up to 70% of the asset value. Automated liquidation mechanisms effectively manage risks, ensuring operations are transparent, secure, and convenient."
+                },
+                "decentralized_advantage": {
+                    "title": "Decentralized Advantage",
+                    "content": "Utilize blockchain technology to provide an open, fair, and trustless financial ecosystem, giving users complete control over their personal assets."
+                },
+                "flexible_asset_growth": {
+                    "title": "Flexible Asset Growth",
+                    "content": "Whether earning interest through network validation or providing liquidity to pools, DragonFly helps users convert idle cryptocurrencies into long-term earnings."
+                },
+                "professional_security": {
+                    "title": "Professional Security Assurance",
+                    "content": "Adopt advanced smart contract technology, strict auditing, and risk control systems to safeguard user assets."
+                }
+            }
+        },
+        "dgfy_token": {
+            "title": "DGFY TOKEN",
+            "description": "The platform's equity token 'DGFY' is key for users to earn returns and participate in investment products. By engaging with the DragonFly platform, you can enjoy diverse investment opportunities and leverage the wide application of 'DGFY' tokens within the platform's ecosystem to achieve asset appreciation and stable returns.",
+            "allocation_title": "Allocation Method:",
+            "list": [
+                {
+                    "title": "Donation Airdrop, Linear Unlock",
+                    "num": "20%",
+                    "color": "#FAC858"
+                },
+                {
+                    "title": "LP Initial Circulation Pool",
+                    "num": "15%",
+                    "color": "#93BEFF"
+                },
+                {
+                    "title": "Airdrop, Marketing",
+                    "num": "5%",
+                    "color": "#507AFC"
+                },
+                {
+                    "title": "Liquidity Mining Output",
+                    "num": "54%",
+                    "color": "#9CC634"
+                },
+                {
+                    "title": "Marketing (output unlocks synchronously with liquidity mining, no reserve)",
+                    "num": "6%",
+                    "color": "#91CC75"
+                }
+            ],
+            "footer": [
+                {
+                    "label": "Token Symbol:",
+                    "value": "DGFY"
+                },
+                {
+                    "label": "Total Issuance:",
+                    "value": "10,000,000,000 (100 billion tokens)"
+                },
+                {
+                    "label": "Trading Fee:",
+                    "value": "$1 + 0.2%"
+                },
+                {
+                    "label": "Burn Mechanism:",
+                    "value": "Automatically burn transaction fee tokens daily"
+                }
+            ]
+        },
+        "mission_vision": {
+            "mission": {
+                "title": "Mission",
+                "sub_title": "/Mission",
+                "text": "To build a globally leading decentralized financial ecosystem, including digital lending, staking mining, coin storage interest, and digital trading. Our goal is not only to enable users to store and grow their assets but also to promote global financial inclusion through our services, allowing everyone to enjoy fair, transparent financial services and achieve true financial freedom."
+            },
+            "vision": {
+                "title": "Vision",
+                "sub_title": "/Vision",
+                "text": "To create an open, fair, transparent, and borderless financial world. In this world, anyone can freely engage in financial transactions without worrying about cumbersome procedures, high fees, or unfair regulations."
+            }
+        },
+        "development_planning": {
+            "title": "Development Planning",
+            "sub_title": "/Development Planning",
+            "list": [
+                {
+                    "title": "Phase One: Consolidate Core Functional Ecosystem",
+                    "content": [
+                        "▪︎ Enhance staking mining, liquidity mining, deposit, and lending functionalities to ensure ease of operation and stable returns.",
+                        "▪︎ Strengthen blockchain technology architecture to guarantee efficient and secure user experiences.",
+                        "▪︎ Attract liquidity partners to expand the size and yield of liquidity pools.",
+                        "▪︎ Collaborate with mainstream decentralized exchanges and lending platforms to increase the size and yield of liquidity pools.",
+                        "▪︎ Bridge asset interactions across different blockchains to achieve interoperability and interaction of more coins and protocols.",
+                        "DragonFly utilizes blockchain technology to establish a decentralized financial ecosystem. Through smart contracts, it operates core functionalities, enabling efficient, secure, and transparent transactions, eliminating interference from traditional financial intermediaries."
+                    ]
+                },
+                {
+                    "title": "Phase Two: Expand Users and Functionalities",
+                    "content": [
+                        "▪︎ Conduct global promotion to attract multi-language and multi-region users.",
+                        "▪︎ Launch multi-chain asset support and new financial instruments, such as insurance and derivatives.",
+                        "▪︎ Introduce community governance and incentive mechanisms to enhance user stickiness and ecosystem activity.",
+                        "▪︎ Develop onboarding tutorials and educational content to help new users understand the value and usage of decentralized finance.",
+                        "▪︎ Implement DAO (Decentralized Autonomous Organization) governance model, empowering users with more platform decision-making rights."
+                    ]
+                },
+                {
+                    "title": "Phase Three: Cross-Chain and Intelligent Future",
+                    "content": [
+                        "▪︎ Achieve cross-chain asset interoperability, supporting more blockchain protocols and coins.",
+                        "▪︎ Introduce AI to optimize asset management strategies, providing personalized services.",
+                        "▪︎ Implement green blockchain technology to build a sustainable DeFi platform, aiming to become an industry benchmark.",
+                        "▪︎ Bring in third-party developers and open platform APIs to foster the creation of more innovative applications within the ecosystem.",
+                        "▪︎ Integrate AI technologies to optimize user revenue strategies and provide personalized financial advice.",
+                        "▪︎ Adopt more efficient consensus mechanisms to reduce energy consumption and build a sustainable DeFi ecosystem.",
+                        "▪︎ Become an industry benchmark by creating a DeFi platform that integrates security, convenience, and innovation, becoming the trusted choice for financial services."
+                    ]
+                }
+            ]
+        },
+        "collaboration_partners": {
+            "title": "Collaboration Partners",
+            "sub_title": "/Collaboration Partners"
+        }
+    }
+}

@@ -1,0 +1,64 @@
+@import './index.scss';
+
+.img-50{
+    width: 50%;
+}
+
+.title{
+    font-size: 52px;
+    color: #FFFFFF;
+    @include responseTo(mobile){
+        font-size: 30px;
+    }
+}
+
+.sub-title{
+    font-size: 20px;
+    color: #9CC634;
+    @include responseTo(mobile){
+        font-size: 16px;
+    }
+}
+
+.background{
+    padding:100px 160px;
+    @include responseTo(mobile){
+        padding:30px 30px;
+    }
+}
+
+.text-content{
+    font-size: 24px;
+    color: #B3B3B3;
+    line-height: 36px;
+}
+
+.curpo{
+    cursor: pointer;
+}
+
+
+.ant-select-selection-item{
+    font-size: 20px;
+}
+
+button {
+all: unset;  /* 移除所有样式 */
+cursor: pointer;  /* 恢复鼠标点击时的指针样式 */
+}
+input, textarea {
+
+all: unset;  /* 移除所有样式 */
+border: none;  /* 去掉边框 */
+outline: none;  /* 去掉聚焦时的轮廓 */
+background: transparent;  /* 去掉背景色 */
+padding: 0;  /* 去掉内边距 */
+font: inherit;  /* 继承父元素字体 */
+}
+ul{
+    padding: 0;
+    margin: 0;
+}
+li{
+    display: block;
+}
