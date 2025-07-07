@@ -85,7 +85,8 @@ trait Web3Trait
     {
         $amount = 0;
         foreach ($orders as $order) {
-            $amount += $order->amount * $order->currencyObj->price;
+            $currency = Currency::find($order->currency_id);
+            $amount += $order->amount * $currency->price;
         }
         return $amount;
     }
