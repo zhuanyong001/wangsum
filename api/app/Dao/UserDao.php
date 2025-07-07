@@ -198,13 +198,21 @@ class UserDao
         $deposit_orders = $user->depositOrders()->where('status', 3)->whereBetween('completed_at', $date)->get();
         $user->today_recharge_amount = DepositOrder::sumUsdAmount($deposit_orders);
         //今日提现
-        $withdrawal_orders = $user->withdrawalOrders()->where('status', 3)->whereBetween('completed_at', $date)->get();
+        $withdrawal_orders = WithdrawalOrder::with('currencyObj')->where('user_id', $user->id)->where('status', 3)->whereBetween('completed_at', $date)->get();
         $user->today_withdrawal_amount = WithdrawalOrder::sumUsdAmount($withdrawal_orders);
         //今日矿池
         $user->today_mining_amount = $this->getTeamMiningPoolAmount([$user->id], $date);
 
+
+        //团队充值
+        $team_ids = $this->getTeamIds($user->id);
+        $team_deposit_orders = DepositOrder::whereIn('user_id', $team_ids)->where('status', 3)->whereBetween('completed_at', $date)->get();
+        $user->team_today_recharge_amount = DepositOrder::sumUsdAmount($team_deposit_orders);
+        $team_withdrawal_orders = WithdrawalOrder::whereIn('user_id', $team_ids)->where('status', 3)->whereBetween('completed_at', $date)->get();
+        $user->team_today_withdrawal_amount = WithdrawalOrder::sumUsdAmount($team_withdrawal_orders);
+
         //今日团队矿池
-        $user->today_team_pool_amount = $this->getTeamMiningPoolAmount($this->getTeamIds($user->id), $date);
+        $user->team_today_mining_amount = $this->getTeamMiningPoolAmount($this->getTeamIds($user->id), $date);
     }
 
 

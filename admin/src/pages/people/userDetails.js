@@ -93,7 +93,7 @@ export const useUserDetail = () => {
       },
     },
     {
-      label: '今日统计',
+      label: '个人今日统计',
       key: 'today_stat',
       type: 'custom-row',
       position: 'top',
@@ -106,7 +106,25 @@ export const useUserDetail = () => {
               h('span', `今日充值:$${record.today_recharge_amount} `),
               h('span', `今日提现:$${record.today_withdrawal_amount} `),
               h('span', `今日矿池:$${record.today_mining_amount} `),
-              h('span', `今日团队:$${record.today_team_pool_amount} `),
+            ],
+          }
+        );
+      },
+    },
+    {
+      label: '团队今日统计',
+      key: 'team_today_stat',
+      type: 'custom-row',
+      position: 'top',
+      render: (text, record) => {
+        return h(
+          Space,
+          {},
+          {
+            default: [
+              h('span', `今日充值:$${record.team_today_recharge_amount} `),
+              h('span', `今日提现:$${record.team_today_withdrawal_amount} `),
+              h('span', `今日矿池:$${record.team_today_mining_amount} `),
             ],
           }
         );
