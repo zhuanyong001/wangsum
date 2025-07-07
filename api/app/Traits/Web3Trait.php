@@ -68,4 +68,19 @@ trait Web3Trait
     {
         return $this->belongsTo(User::class);
     }
+
+
+    public function getUsdAmount()
+    {
+        return $this->amount * $this->currency->price;
+    }
+    //统计订单的usd金额
+    public static function sumUsdAmount($orders)
+    {
+        $amount = 0;
+        foreach ($orders as $order) {
+            $amount += $order->getUsdAmount();
+        }
+        return $amount;
+    }
 }

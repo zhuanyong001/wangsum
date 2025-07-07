@@ -47,6 +47,11 @@ class UserController extends Controller
         $user = User::findOrFail($id)->makeVisible('remark');
         //按层级 统计下级数量
         $userDao->getUserInfo($user);
+
+        $userDao->getUserInofByDate($user);
+
+
+
         return $this->success($user);
     }
 

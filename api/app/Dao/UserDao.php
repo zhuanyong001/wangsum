@@ -9,6 +9,7 @@ use App\Models\DepositOrder;
 use App\Models\MiningPoolOrder;
 use App\Models\TeamRelation;
 use App\Models\UserAsset;
+use App\Models\WithdrawalOrder;
 use App\Services\TronService;
 use Illuminate\Support\Facades\DB;
 use Exception;
@@ -180,6 +181,30 @@ class UserDao
         $user->getTeamActiveUserCount();
         $user->pool_amount_usdt = UserDao::getTeamPoolAmountUsdByDeep($user->id);
         $user->l8_pool_amount_usdt = UserDao::getTeamPoolAmountUsdByDeep($user->id, 8);
+    }
+
+    public function getUserInofByDate(User &$user, $date = [])
+    {
+        if (!empty($date)) {
+            $start_date = $date[0];
+            $end_date = $date[1];
+        } else {
+            //默认今天
+            $start_date = date('Y-m-d 00:00:00');
+            $end_date = date('Y-m-d 23:59:59');
+        }
+        $date = [$start_date, $end_date];
+        //今日充值
+        $deposit_orders = $user->depositOrders()->where('status', 3)->whereBetween('completed_at', $date)->get();
+        $user->today_recharge_amount = DepositOrder::sumUsdAmount($deposit_orders);
+        //今日提现
+        $withdrawal_orders = $user->withdrawalOrders()->where('status', 3)->whereBetween('completed_at', $date)->get();
+        $user->today_withdrawal_amount = WithdrawalOrder::sumUsdAmount($withdrawal_orders);
+        //今日矿池
+        $user->today_mining_amount = $this->getTeamMiningPoolAmount([$user->id], $date);
+
+        //今日团队矿池
+        $user->today_team_pool_amount = $this->getTeamMiningPoolAmount($this->getTeamIds($user->id), $date);
     }
 
 

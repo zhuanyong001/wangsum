@@ -74,20 +74,6 @@ export const useUserDetail = () => {
     },
 
     {
-      label: '资产详情',
-      key: 'assets',
-      type: 'table',
-      position: 'top',
-      columns: [
-        { title: '币种', dataIndex: ['currency', 'name'], type: 'text' },
-        { title: '余额', dataIndex: 'amount', type: 'text' },
-        { title: '充值金额', dataIndex: 'deposit_amount', type: 'text' },
-        { title: '提现金额', dataIndex: 'withdrawal_amount', type: 'text' },
-        { title: '总池金额', dataIndex: 'pools_amount', type: 'text' },
-        { title: '团队总金额', dataIndex: 'team_amount', type: 'text' },
-      ],
-    },
-    {
       label: '会员等级详情',
       key: 'membership_level',
       type: 'custom-row',
@@ -101,6 +87,26 @@ export const useUserDetail = () => {
               h('span', `会员等级：${record.membership_level} `),
               h('span', `节点金额：$${record.pool_amount_usdt} `),
               h('span', `八代业绩：$${record.l8_pool_amount_usdt} `),
+            ],
+          }
+        );
+      },
+    },
+    {
+      label: '今日统计',
+      key: 'today_stat',
+      type: 'custom-row',
+      position: 'top',
+      render: (text, record) => {
+        return h(
+          Space,
+          {},
+          {
+            default: [
+              h('span', `今日充值:$${record.today_recharge_amount} `),
+              h('span', `今日提现:$${record.today_withdrawal_amount} `),
+              h('span', `今日矿池:$${record.today_mining_amount} `),
+              h('span', `今日团队:$${record.today_team_pool_amount} `),
             ],
           }
         );
@@ -126,6 +132,20 @@ export const useUserDetail = () => {
           }
         );
       },
+    },
+    {
+      label: '资产详情',
+      key: 'assets',
+      type: 'table',
+      position: 'top',
+      columns: [
+        { title: '币种', dataIndex: ['currency', 'name'], type: 'text' },
+        { title: '余额', dataIndex: 'amount', type: 'text' },
+        { title: '充值金额', dataIndex: 'deposit_amount', type: 'text' },
+        { title: '提现金额', dataIndex: 'withdrawal_amount', type: 'text' },
+        { title: '总池金额', dataIndex: 'pools_amount', type: 'text' },
+        { title: '团队总金额', dataIndex: 'team_amount', type: 'text' },
+      ],
     },
     // {
     //   label: '会员详情',
