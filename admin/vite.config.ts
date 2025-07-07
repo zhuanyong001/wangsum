@@ -55,7 +55,7 @@ export default ({ command, mode }) => {
       jsxFragment: 'Fragment',
     },
     build: {
-      sourcemap: false,
+      sourcemap: true,
       chunkSizeWarningLimit: 2048,
       rollupOptions: mode === 'production' ? prodRollupOptions : {},
     },
