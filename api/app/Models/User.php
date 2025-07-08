@@ -39,7 +39,9 @@ class User extends Authenticatable
         'share_code',
         'api_token',
         'remark',
-        'is_leader'
+        'is_leader',
+        'leader_rebate_discount',
+        'leader_referral_fee_rate'
     ];
 
     /**

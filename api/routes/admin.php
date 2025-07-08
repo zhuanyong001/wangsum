@@ -138,7 +138,7 @@ Route::middleware(['auth:sanctum', 'check.token.expiry'])->group(function () {
                 Route::post('/set/remark', [UserController::class, 'setRemark'])->middleware('log.admin:edit,设置备注'); //设置会员等级
                 Route::post('/set/can_exchange', [UserController::class, 'setCanExchange'])->middleware('log.admin:edit,兑换功能'); //冻结用户
                 Route::post('/change/{state}', [UserController::class, 'changeState'])->middleware('log.admin:edit,兑换功能'); //冻结用户
-
+                Route::post('/set/leader', [UserController::class, 'setLeader'])->middleware('log.admin:edit,设置团长'); //设置团长
             });
         });
 

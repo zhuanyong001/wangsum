@@ -200,6 +200,25 @@ class UserController extends Controller
     }
 
 
+    //团长设置
+    public function setLeader(Request $request)
+    {
+        $request->validate([
+            'user_id' => 'required|integer',
+            'is_leader' => 'required|in:1,0',
+            'leader_rebate_discount' => 'required|numeric',
+            'leader_referral_fee_rate' => 'required|numeric'
+        ]);
+        $user_id = $request->get('user_id');
+        $user = User::findOrFail($user_id);
+        $user->is_leader = $request->get('is_leader');
+        $user->leader_rebate_discount = $request->get('leader_rebate_discount');
+        $user->leader_referral_fee_rate = $request->get('leader_referral_fee_rate');
+        $user->save();
+        return $this->success();
+    }
+
+
     /**
      * 设置内部账号
      * 

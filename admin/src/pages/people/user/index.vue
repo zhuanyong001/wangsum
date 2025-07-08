@@ -47,7 +47,7 @@
   });
   const { LookProxy, open, user_id, drawerStatus } = useEdit({ getData });
   const { recharge } = Recharge({ getData });
-  const { setLevel, setRemark } = useMember({ getData });
+  const { setLevel, setRemark, setLeader } = useMember({ getData });
   const { freeze } = freezes({ getData });
   const { addAC } = addAcount({ getData });
   const { Set_can_exchange, Set_is_ln_rebate, Setis_internal, Setis_leader } = useChangeState({ getData });
@@ -123,14 +123,7 @@
           <a-tag :color="text === 1 ? 'blue' : 'red'">{{ text === 1 ? '正常' : '冻结' }}</a-tag>
         </template>
         <template v-if="column.dataIndex === 'is_leader'">
-          <a-popconfirm
-            :title="`确定要${record.is_leader === 0 ? '设置' : '解除'}团长吗`"
-            ok-text="确定"
-            cancel-text="取消"
-            @confirm="Setis_leader({ user_id: record.id, type: record.is_leader === 0 ? 1 : 0 })"
-          >
-            <a-button type="link"> {{ text === 1 ? '是' : '否' }}</a-button>
-          </a-popconfirm>
+          <a-button type="link" @click="setLeader(record)"> {{ text === 1 ? '是' : '否' }}</a-button>
         </template>
         <template v-if="column.dataIndex === 'is_internal'">
           <a-popconfirm
@@ -181,6 +174,7 @@
                 <a-button type="link">{{ record.status === 1 ? '冻结' : '解冻' }}</a-button>
               </a-popconfirm>
               <a-button type="link" @click="showFinancialModal(record.id)"> 账变 </a-button>
+              <a-button type="link" @click="setLeader(record)"> 团长配置 </a-button>
             </a-space>
             <a-space>
               <a-button type="link" @click="LookProxy(record.id, 0)">下级</a-button>

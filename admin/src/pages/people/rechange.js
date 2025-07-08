@@ -94,6 +94,25 @@ export const useMember = ({ getData }) => {
       })
       .Init({ user_id: id, remark });
   };
+  const setLeader = (form = {}) => {
+    const { id, is_leader, leader_rebate_discount, leader_referral_fee_rate } = form;
+    const formConfig = reactive([
+      { label: '团长', key: 'is_leader', type: 'switch', desc: '' },
+      { label: '团长返佣折扣比率', key: 'leader_rebate_discount', type: 'text', desc: '' },
+      { label: '团长介绍费比率', key: 'leader_referral_fee_rate', type: 'text', desc: '' },
+    ]);
+    console.log('is_leader', is_leader);
 
-  return { setLevel, LevelList, setRemark };
+    modal
+      .open({
+        props: {
+          formConfig,
+          title,
+          submit: (formData) => submit(formData, '/web3/members/set/leader'),
+        },
+      })
+      .Init({ user_id: id, is_leader, leader_rebate_discount, leader_referral_fee_rate });
+  };
+
+  return { setLevel, LevelList, setRemark, setLeader };
 };

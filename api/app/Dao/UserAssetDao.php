@@ -709,22 +709,23 @@ class UserAssetDao
                         ['user_id' => $leader->id, 'currency_id' => $miningPoolOrder->currency_id],
                         ['amount' => 0]
                     );
-                    $this->addMiningPoolAwardLog($miningPoolOrder->id, $leader->id, $leader_rebate_amount, $miningPoolOrder->user_id, 3, 'TLR');
-                    $this->updateUserAsset($userAsset, $leader_rebate_amount, UserAssetDao::TYPE_TEAM_LEADER_AWARD, '团长返利');
-
+                    $leader_rebate_amount = $leader_rebate_amount * $leader->leader_rebate_discount;
+                    if ($leader_rebate_amount > 1e-8) {
+                        $this->addMiningPoolAwardLog($miningPoolOrder->id, $leader->id, $leader_rebate_amount, $miningPoolOrder->user_id, 3, 'TLR');
+                        $this->updateUserAsset($userAsset, $leader_rebate_amount, UserAssetDao::TYPE_TEAM_LEADER_AWARD, '团长返利');
+                    }
                     //上级团长介绍费
-                    if ($cycleItem->leader_referral_fee_rate > 0) {
-                        $leader_referral_fee_amount = $miningPoolOrder->amount * $cycleItem->leader_referral_fee_rate;
+
+                    $leader_referrer = User::getTeamLeader($leader->id);
+                    if ($leader_referrer) {
+                        $userAsset = UserAsset::firstOrCreate(
+                            ['user_id' => $leader_referrer->id, 'currency_id' => $miningPoolOrder->currency_id],
+                            ['amount' => 0]
+                        );
+                        $leader_referral_fee_amount = $miningPoolOrder->amount * $leader_referrer->leader_referral_fee_rate;
                         if ($leader_referral_fee_amount > 1e-8) {
-                            $leader_referrer = User::getTeamLeader($leader->id);
-                            if ($leader_referrer) {
-                                $userAsset = UserAsset::firstOrCreate(
-                                    ['user_id' => $leader_referrer->id, 'currency_id' => $miningPoolOrder->currency_id],
-                                    ['amount' => 0]
-                                );
-                                $this->addMiningPoolAwardLog($miningPoolOrder->id, $leader_referrer->id, $leader_referral_fee_amount, $leader->id, 3, 'TLJF');
-                                $this->updateUserAsset($userAsset, $leader_referral_fee_amount, UserAssetDao::TYPE_TEAM_LEADER_REFERRAL_FEE, '团长介绍费');
-                            }
+                            $this->addMiningPoolAwardLog($miningPoolOrder->id, $leader_referrer->id, $leader_referral_fee_amount, $leader->id, 3, 'TLJF');
+                            $this->updateUserAsset($userAsset, $leader_referral_fee_amount, UserAssetDao::TYPE_TEAM_LEADER_REFERRAL_FEE, '团长介绍费');
                         }
                     }
                 }
