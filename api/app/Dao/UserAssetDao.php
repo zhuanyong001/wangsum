@@ -722,7 +722,9 @@ class UserAssetDao
                             ['user_id' => $leader_referrer->id, 'currency_id' => $miningPoolOrder->currency_id],
                             ['amount' => 0]
                         );
-                        $leader_referral_fee_amount = $miningPoolOrder->amount * $leader_referrer->leader_referral_fee_rate;
+
+                        // 介绍费比例 取 第一个团长设置  leader_referral_fee_rate   返上级团长介绍费
+                        $leader_referral_fee_amount = $miningPoolOrder->amount * $leader->leader_referral_fee_rate;
                         if ($leader_referral_fee_amount > 1e-8) {
                             $this->addMiningPoolAwardLog($miningPoolOrder->id, $leader_referrer->id, $leader_referral_fee_amount, $leader->id, 3, 'TLJF');
                             $this->updateUserAsset($userAsset, $leader_referral_fee_amount, UserAssetDao::TYPE_TEAM_LEADER_REFERRAL_FEE, '团长介绍费');
