@@ -16,7 +16,9 @@ class MiningPoolCycleItem extends Model
         'compound',
         'df_currency_id',
         "df_rate",
-        "limit"
+        "limit",
+        'leader_rebate_rate',
+        'leader_referral_fee_rate'
     ];
 
     public function df_currency()

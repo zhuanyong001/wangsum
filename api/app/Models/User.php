@@ -38,7 +38,8 @@ class User extends Authenticatable
         'tron_address',
         'share_code',
         'api_token',
-        'remark'
+        'remark',
+        'is_leader'
     ];
 
     /**
@@ -240,5 +241,19 @@ class User extends Authenticatable
             return $dao->getUserSumRunningOrderAmount2USD($this->id);
         });
         return  intval($usd);
+    }
+
+    //获取团长
+    public static function getTeamLeader($user_id)
+    {
+        $user = self::find($user_id);
+        if (!$user->referrer) {
+            return null;
+        }
+        $referrer = $user->referrer;
+        if (!$referrer->is_leader) {
+            return self::getTeamLeader($referrer->id);
+        }
+        return $referrer;
     }
 }

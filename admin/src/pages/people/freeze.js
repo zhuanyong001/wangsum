@@ -50,6 +50,11 @@ export const useChangeState = ({ getData }) => {
     let method = 'POST_JSON';
     httpHandle(url, method, formData);
   };
+  const Setis_leader = (formData) => {
+    let url = '/web3/members/change/is_leader';
+    let method = 'POST_JSON';
+    httpHandle(url, method, formData);
+  };
 
-  return { Setis_internal, Set_can_exchange, Set_is_ln_rebate };
+  return { Setis_internal, Set_can_exchange, Set_is_ln_rebate, Setis_leader };
 };

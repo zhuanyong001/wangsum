@@ -170,7 +170,8 @@ class UserController extends Controller
         $states = [
             'is_internal' => 'is_internal',
             'can_exchange' => 'can_exchange',
-            'is_ln_rebate' => 'is_ln_rebate'
+            'is_ln_rebate' => 'is_ln_rebate',
+            'is_leader' => 'is_leader',
         ];
         if (!isset($states[$state])) {
             return $this->fail('状态不存在');

@@ -30,7 +30,8 @@
       { title: '余额', dataIndex: 'balance' },
       { title: '会员等级', dataIndex: 'membership_level', align: 'center' },
       { title: '状态', dataIndex: 'status' },
-      { title: '是否内部号', dataIndex: 'is_internal' },
+      { title: '内部号', dataIndex: 'is_internal' },
+      { title: '团长', dataIndex: 'is_leader' },
       { title: '兑换', dataIndex: 'can_exchange' },
       { title: '存款返利', dataIndex: 'is_ln_rebate' },
       {
@@ -49,7 +50,7 @@
   const { setLevel, setRemark } = useMember({ getData });
   const { freeze } = freezes({ getData });
   const { addAC } = addAcount({ getData });
-  const { Set_can_exchange, Set_is_ln_rebate, Setis_internal } = useChangeState({ getData });
+  const { Set_can_exchange, Set_is_ln_rebate, Setis_internal, Setis_leader } = useChangeState({ getData });
   getData(queryParams.value);
 
   const formConfig = computed(() => [
@@ -120,6 +121,16 @@
         </template>
         <template v-if="column.dataIndex === 'status'">
           <a-tag :color="text === 1 ? 'blue' : 'red'">{{ text === 1 ? '正常' : '冻结' }}</a-tag>
+        </template>
+        <template v-if="column.dataIndex === 'is_leader'">
+          <a-popconfirm
+            :title="`确定要${record.is_leader === 0 ? '设置' : '解除'}团长吗`"
+            ok-text="确定"
+            cancel-text="取消"
+            @confirm="Setis_leader({ user_id: record.id, type: record.is_leader === 0 ? 1 : 0 })"
+          >
+            <a-button type="link"> {{ text === 1 ? '是' : '否' }}</a-button>
+          </a-popconfirm>
         </template>
         <template v-if="column.dataIndex === 'is_internal'">
           <a-popconfirm

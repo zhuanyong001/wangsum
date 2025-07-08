@@ -1,6 +1,6 @@
 <script setup>
   import { useTable } from '@/composables/useTable';
-  import { useEdit,pledgeTypes } from './useEdit';
+  import { useEdit, pledgeTypes } from './useEdit';
   const { columns, dataSource, getData, params, loading, pagination, changeTable, delRow } = useTable({
     url: '/web3/mining-pools/cycle_item/list',
     del_url: '/web3/mining-pools/cycle_item/',
@@ -10,9 +10,13 @@
       { title: '类型', dataIndex: 'type' },
       { title: '日利率', dataIndex: 'daily_rate' },
       { title: '复利', dataIndex: 'compound' },
+      { title: '奖励币种利率', dataIndex: 'df_rate' },
+      { title: '团长返佣比率', dataIndex: 'leader_rebate_rate' },
+      { title: '团长介绍费比率', dataIndex: 'leader_referral_fee_rate' },
+      { title: '购买次数限制', dataIndex: 'limit' },
       { title: '创建时间', dataIndex: 'created_at' },
       { title: '更新时间', dataIndex: 'updated_at' },
-      { title: '操作', dataIndex: 'action' }
+      { title: '操作', dataIndex: 'action' },
     ],
   });
   const { addNew } = useEdit({ getData });

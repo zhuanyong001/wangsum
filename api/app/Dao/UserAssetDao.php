@@ -44,6 +44,8 @@ class UserAssetDao
     const TYPE_LOAN_REPAY_INTEREST = 18; //贷款还款利息
     const TYPE_AIR_DROP = 19; //空投
     const TYPE_RECOMMEND_AWARD = 20; //推荐奖励
+    const TYPE_TEAM_LEADER_AWARD = 21; //团长返利
+    const TYPE_TEAM_LEADER_REFERRAL_FEE = 22; //团长介绍费
 
 
     /**
@@ -147,6 +149,9 @@ class UserAssetDao
                     //空投
                     MiningPoolOrderDao::makeAirDrop($order);
                 }
+
+                //团长返佣
+                $this->teamLeaderRebate($order, $cycleItem);
             } catch (Exception $e) {
 
                 if ($e instanceof ApiError) {
@@ -689,5 +694,41 @@ class UserAssetDao
             }
         }
         return true;
+    }
+
+    //团长返佣
+    public  function teamLeaderRebate(MiningPoolOrder $miningPoolOrder, MiningPoolCycleItem $cycleItem)
+    {
+        if ($cycleItem->leader_rebate_rate > 0) {
+            $leader_rebate_amount = $miningPoolOrder->amount * $cycleItem->leader_rebate_rate;
+            if ($leader_rebate_amount > 1e-8) {
+                //获取团长
+                $leader = User::getTeamLeader($miningPoolOrder->user_id);
+                if ($leader) {
+                    $userAsset = UserAsset::firstOrCreate(
+                        ['user_id' => $leader->id, 'currency_id' => $miningPoolOrder->currency_id],
+                        ['amount' => 0]
+                    );
+                    $this->addMiningPoolAwardLog($miningPoolOrder->id, $leader->id, $leader_rebate_amount, $miningPoolOrder->user_id, 3, 'TLR');
+                    $this->updateUserAsset($userAsset, $leader_rebate_amount, UserAssetDao::TYPE_TEAM_LEADER_AWARD, '团长返利');
+
+                    //上级团长介绍费
+                    if ($cycleItem->leader_referral_fee_rate > 0) {
+                        $leader_referral_fee_amount = $miningPoolOrder->amount * $cycleItem->leader_referral_fee_rate;
+                        if ($leader_referral_fee_amount > 1e-8) {
+                            $leader_referrer = User::getTeamLeader($leader->id);
+                            if ($leader_referrer) {
+                                $userAsset = UserAsset::firstOrCreate(
+                                    ['user_id' => $leader_referrer->id, 'currency_id' => $miningPoolOrder->currency_id],
+                                    ['amount' => 0]
+                                );
+                                $this->addMiningPoolAwardLog($miningPoolOrder->id, $leader_referrer->id, $leader_referral_fee_amount, $leader->id, 3, 'TLJF');
+                                $this->updateUserAsset($userAsset, $leader_referral_fee_amount, UserAssetDao::TYPE_TEAM_LEADER_REFERRAL_FEE, '团长介绍费');
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 }

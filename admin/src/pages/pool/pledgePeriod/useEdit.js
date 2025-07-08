@@ -18,6 +18,8 @@ export const useEdit = ({ getData }) => {
     { label: '复利', key: 'compound', type: 'switch', desc: '', default: 1 },
     { label: '奖励的币种', key: 'df_currency_id', type: 'select', desc: '', opts: currency_list_all },
     { label: '奖励币种利率', key: 'df_rate', type: 'text', desc: '' },
+    { label: '团长返佣比率', key: 'leader_rebate_rate', type: 'text', desc: '' },
+    { label: '团长介绍费比率', key: 'leader_referral_fee_rate', type: 'text', desc: '' },
     { label: '购买次数限制', key: 'limit', type: 'number', desc: '0为不限制' },
   ]);
   const submit = (formData) => {

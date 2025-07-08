@@ -154,6 +154,9 @@ export const useSelectStore = defineStore('selectOpts', () => {
     { label: '贷款质押解冻', value: 17 }, // 贷款质押解冻
     { label: '贷款还款利息', value: 18 },
     { label: '空投', value: 19 },
+    { label: '推荐记录', value: 20 },
+    { label: '团长返佣', value: 21 },
+    { label: '团长介绍费', value: 22 },
   ];
 
   const poolTypes = [

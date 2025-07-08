@@ -34,8 +34,10 @@
   if (props.user_id) {
     params.user_id = props.user_id;
   }
-  getData({ ...props, ...queryParams });
-  const formConfig = computed(() => [
+  onMounted(() => {
+    getData({ ...props, ...queryParams });
+  });
+  const formConfig = ref([
     {
       label: '质押币种',
       key: 'coin_code',
