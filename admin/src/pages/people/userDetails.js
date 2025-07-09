@@ -20,6 +20,26 @@ const createButton = (text, onClick) => {
   );
 };
 
+const renderTeamPoolStat = (record) => {
+  if (record.team_pool_stat.length === 0) {
+    return h('div', {}, { default: () => '暂无数据' });
+  }
+  let res = record.team_pool_stat.map((item) => {
+    return h(
+      'li',
+      {},
+      {
+        default: () =>
+          `🔰 ${['', '⛏️矿池', '💰存款'][item.cate]} | 周期 ${item.cycle} | 💎 ${item.currency.name} | 数量 ${
+            item.amount - 0
+          } | 💵 $${(item.amount * item.currency.price).toFixed(2) - 0}`,
+      }
+    );
+  });
+
+  return h('ul', {}, { default: () => [...res] });
+};
+
 export const useUserDetail = () => {
   const title = '人员信息';
   const formConfig = [
@@ -112,7 +132,7 @@ export const useUserDetail = () => {
       },
     },
     {
-      label: '团队今日统计',
+      label: '团队统计',
       key: 'team_today_stat',
       type: 'custom-row',
       position: 'top',
@@ -128,6 +148,15 @@ export const useUserDetail = () => {
             ],
           }
         );
+      },
+    },
+    {
+      label: '团队矿池统计',
+      key: 'team_pool_stat',
+      type: 'custom-row',
+      position: 'top',
+      render: (text, record) => {
+        return renderTeamPoolStat(record);
       },
     },
     {

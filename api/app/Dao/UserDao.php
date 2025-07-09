@@ -415,4 +415,17 @@ class UserDao
         }
         return false;
     }
+
+
+
+
+    public function getTeamPoolInfo(User $user)
+    {
+        //统计各币种各周期的存款金额
+        $team_ids = $this->getTeamIds($user->id);
+        $team_ids[] = $user->id;
+
+        $stat = MiningPoolOrder::with('currency')->whereIn('user_id', $team_ids)->where('status', MiningPoolOrder::STATUS_RUNING)->groupBy('currency_id', 'cycle', 'cate')->selectRaw('currency_id,cycle,cate,sum(amount) as amount')->get();
+        $user->team_pool_stat = $stat;
+    }
 }

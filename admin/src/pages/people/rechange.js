@@ -45,7 +45,7 @@ export const Recharge = ({ getData }) => {
 
 const LevelList = computed(() => store.Level_list);
 export const useMember = ({ getData }) => {
-  const title = '设置会员等级';
+  const title = '设置会员';
 
   const submit = (formData, url) => {
     //let url = '/web3/members/set/membership_level';
