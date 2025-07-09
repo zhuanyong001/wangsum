@@ -190,7 +190,7 @@
   import { reactive, ref, computed } from 'vue';
   import MiniStatisticCard from '@/components/statistic/MiniStatisticCard.vue';
   import ActiveUsers from './ActiveUsers.vue';
-  import { showCycleStatModal } from './index.ts';
+  import { showCycleStatModal } from './useCycleStatModal.js';
   // import SalesOverview from './SalesOverview.vue';
   // import Projects from './Projects.vue';
   // import OrderHistory from './OrderHistory.vue';
