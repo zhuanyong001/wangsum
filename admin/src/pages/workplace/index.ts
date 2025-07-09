@@ -1,6 +1,5 @@
 import Workplace from './Workplace.vue';
 import { h } from 'vue';
-export default Workplace;
 
 import CycleStat from './CycleStat.vue';
 
@@ -8,7 +7,7 @@ import modal from '@/components/dy/Modal/modal.js';
 
 import { Modal } from 'ant-design-vue';
 
-const showCycleStatModal = () => {
+export const showCycleStatModal = () => {
   const newModal = h(
     Modal,
     {
@@ -30,5 +29,4 @@ const showCycleStatModal = () => {
     },
   });
 };
-
-export { showCycleStatModal };
+export default Workplace;
