@@ -154,4 +154,10 @@ class StatisticsController extends Controller
             'last_u_id' => 0
         ];
     }
+
+    public function cycleStatistics()
+    {
+        $stat = MiningPoolOrder::with('currency')->WithoutInternalIds()->WithAdminAuth()->where('status', MiningPoolOrder::STATUS_RUNING)->groupBy('currency_id', 'cycle', 'cate')->selectRaw('currency_id,cycle,cate,sum(amount) as amount')->get();
+        return $this->success($stat);
+    }
 }

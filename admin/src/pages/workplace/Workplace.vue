@@ -12,6 +12,7 @@
         :shortcuts="shortcuts"
       />
       <el-button style="margin-left: 20px" type="primary" @click="init">搜索</el-button>
+      <a-button style="margin-left: 20px" type="link" @click="showCycleStatModal">查看周期统计</a-button>
     </div>
     <div class="">
       <div class="bg-container p-base rounded-b-lg rounded-tr-lg pt-8 flex items-end justify-between">
@@ -189,6 +190,7 @@
   import { reactive, ref, computed } from 'vue';
   import MiniStatisticCard from '@/components/statistic/MiniStatisticCard.vue';
   import ActiveUsers from './ActiveUsers.vue';
+  import { showCycleStatModal } from './index.ts';
   // import SalesOverview from './SalesOverview.vue';
   // import Projects from './Projects.vue';
   // import OrderHistory from './OrderHistory.vue';

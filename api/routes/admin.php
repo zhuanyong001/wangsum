@@ -229,6 +229,7 @@ Route::middleware(['auth:sanctum', 'check.token.expiry'])->group(function () {
                 Route::post('/recharge', [StatisticsController::class, 'rechargeStatistics']);
                 Route::post('/withdraw', [StatisticsController::class, 'withdrawStatistics']);
                 Route::post('/all', [StatisticsController::class, 'allStatistics']);
+                Route::get('/cycle_stat', [StatisticsController::class, 'cycleStatistics']);
             }
         );
 
