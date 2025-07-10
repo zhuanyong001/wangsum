@@ -120,6 +120,12 @@
         <a-statistic
           class="w-20"
           :valueStyle="{ fontWeight: 500 }"
+          title="白名单人数"
+          :value="allData?.total_white_list_user"
+        ></a-statistic>
+        <a-statistic
+          class="w-20"
+          :valueStyle="{ fontWeight: 500 }"
           title="总充值数"
           :value="allData?.total_recharge_count"
         ></a-statistic>

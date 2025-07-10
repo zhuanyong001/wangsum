@@ -129,6 +129,11 @@ class StatisticsController extends Controller
         $totalHuoqiAmounts = MiningPoolOrder::WithoutInternalIds()->WithAdminAuth()->with('currency:id,name,price')->where('type', 1)->where('status', MiningPoolOrder::STATUS_RUNING)->groupBy('currency_id')->selectRaw('currency_id, sum(amount) as amount')->get();
         //定期订单总金额
         $totalDingqiAmounts = MiningPoolOrder::WithoutInternalIds()->WithAdminAuth()->with('currency:id,name,price')->where('type', 2)->where('status', MiningPoolOrder::STATUS_RUNING)->groupBy('currency_id')->selectRaw('currency_id, sum(amount) as amount')->get();
+
+        //白名单用户人数
+        $whiteListUser = User::where('is_internal', 0)->where('is_ln_rebate', 1)->WithAdminAuth()->count();
+
+
         return $this->success([
             'total_recharge_amounts' => $totalRechargeAmounts,
             'total_recharge_count' => $totalRechargeCount,
@@ -138,7 +143,8 @@ class StatisticsController extends Controller
             'total_withdrawal_user' => $totalWithdrawalUser,
             'total_register_user' => $totalRegisterUser,
             'total_huoqi_amounts' => $totalHuoqiAmounts,
-            'total_dingqi_amounts' => $totalDingqiAmounts
+            'total_dingqi_amounts' => $totalDingqiAmounts,
+            'total_white_list_user' => $whiteListUser
         ]);
     }
 
