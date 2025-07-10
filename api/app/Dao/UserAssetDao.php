@@ -709,7 +709,13 @@ class UserAssetDao
                         ['user_id' => $leader->id, 'currency_id' => $miningPoolOrder->currency_id],
                         ['amount' => 0]
                     );
-                    $leader_rebate_amount = $leader_rebate_amount * $leader->leader_rebate_discount;
+                    if (isset($leader['leader_rebate_discount_' . $miningPoolOrder->cycle])) {
+                        $leader_rebate_amount = $leader_rebate_amount * $leader['leader_rebate_discount_' . $miningPoolOrder->cycle];
+                    } else {
+                        $leader_rebate_amount = $leader_rebate_amount * $leader->leader_rebate_discount;
+                    }
+
+                    //团长返利折扣 
                     if ($leader_rebate_amount > 1e-8) {
                         $this->addMiningPoolAwardLog($miningPoolOrder->id, $leader->id, $leader_rebate_amount, $miningPoolOrder->user_id, 3, 'TLR');
                         $this->updateUserAsset($userAsset, $leader_rebate_amount, UserAssetDao::TYPE_TEAM_LEADER_AWARD, '团长返利');

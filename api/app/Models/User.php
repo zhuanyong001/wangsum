@@ -40,6 +40,9 @@ class User extends Authenticatable
         'api_token',
         'remark',
         'is_leader',
+        'leader_rebate_discount_90',
+        'leader_rebate_discount_180',
+        'leader_rebate_discount_365',
         'leader_rebate_discount',
         'leader_referral_fee_rate'
     ];

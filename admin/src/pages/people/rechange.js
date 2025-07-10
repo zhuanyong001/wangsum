@@ -95,13 +95,23 @@ export const useMember = ({ getData }) => {
       .Init({ user_id: id, remark });
   };
   const setLeader = (form = {}) => {
-    const { id, is_leader, leader_rebate_discount, leader_referral_fee_rate } = form;
+    const {
+      id,
+      is_leader,
+      leader_rebate_discount_90,
+      leader_rebate_discount_180,
+      leader_rebate_discount_365,
+      leader_rebate_discount,
+      leader_referral_fee_rate,
+    } = form;
     const formConfig = reactive([
       { label: '团长', key: 'is_leader', type: 'switch', desc: '' },
-      { label: '团长返佣折扣比率', key: 'leader_rebate_discount', type: 'text', desc: '' },
+      { label: '90天-返佣折扣比率', key: 'leader_rebate_discount_90', type: 'text', desc: '' },
+      { label: '180天-返佣折扣比率', key: 'leader_rebate_discount_180', type: 'text', desc: '' },
+      { label: '360天-返佣折扣比率', key: 'leader_rebate_discount_365', type: 'text', desc: '' },
+      { label: '其他周期-返佣折扣比率', key: 'leader_rebate_discount', type: 'text', desc: '' },
       { label: '团长介绍费比率', key: 'leader_referral_fee_rate', type: 'text', desc: '' },
     ]);
-    console.log('is_leader', is_leader);
 
     modal
       .open({
@@ -111,7 +121,15 @@ export const useMember = ({ getData }) => {
           submit: (formData) => submit(formData, '/web3/members/set/leader'),
         },
       })
-      .Init({ user_id: id, is_leader, leader_rebate_discount, leader_referral_fee_rate });
+      .Init({
+        user_id: id,
+        is_leader,
+        leader_rebate_discount_90,
+        leader_rebate_discount_180,
+        leader_rebate_discount_365,
+        leader_rebate_discount,
+        leader_referral_fee_rate,
+      });
   };
 
   return { setLevel, LevelList, setRemark, setLeader };

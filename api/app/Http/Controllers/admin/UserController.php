@@ -206,12 +206,17 @@ class UserController extends Controller
         $request->validate([
             'user_id' => 'required|integer',
             'is_leader' => 'required|in:1,0',
-            'leader_rebate_discount' => 'required|numeric',
+            'leader_rebate_discount_90' => 'required|numeric',
+            'leader_rebate_discount_180' => 'required|numeric',
+            'leader_rebate_discount_365' => 'required|numeric',
             'leader_referral_fee_rate' => 'required|numeric'
         ]);
         $user_id = $request->get('user_id');
         $user = User::findOrFail($user_id);
         $user->is_leader = $request->get('is_leader');
+        $user->leader_rebate_discount_90 = $request->get('leader_rebate_discount_90');
+        $user->leader_rebate_discount_180 = $request->get('leader_rebate_discount_180');
+        $user->leader_rebate_discount_365 = $request->get('leader_rebate_discount_365');
         $user->leader_rebate_discount = $request->get('leader_rebate_discount');
         $user->leader_referral_fee_rate = $request->get('leader_referral_fee_rate');
         $user->save();
