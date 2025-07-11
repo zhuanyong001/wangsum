@@ -18,6 +18,7 @@ export const createTypeData = (t: (key: string) => string): selectObj[] => [
   { name: t('type.loanPledgeUnfreeze'), value: 17 }, // 贷款质押解冻
   { name: t('type.loanRepayInterest'), value: 18 }, // 贷款还款利息
   { name: t('type.air_drop'), value: 19 }, // 空投
+  { name: t('type.air_drop'), value: 20 }, // 注册赠送
 ]
 
 // ['','充值','提现','兑换','奖励','手续费','质押冻结','质押解冻','质押解冻','质押收益','提现失败']
