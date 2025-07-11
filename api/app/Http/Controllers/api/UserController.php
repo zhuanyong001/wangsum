@@ -7,6 +7,7 @@ use App\Dao\UserDao;
 use App\Exceptions\ApiError;
 use App\Http\Controllers\Controller;
 use App\Jobs\UserLoginJobs;
+use App\Jobs\UserRegisterJobs;
 use App\Models\MembershipLevel;
 use App\Models\MiningPoolAwardLog;
 use App\Models\MiningPoolOrder;
@@ -68,11 +69,11 @@ class UserController extends Controller
         // $messageHex = bin2hex($message);
 
 
-        // if (in_array($address, ['A1', 'A2', 'A3', 'A4', 'A5', 'A6', 'A7', 'A8', 'A9-1', 'A9', 'A10'])) {
-        //     $response['result'] = true;
-        // } else {
-        $response = $this->userDao->web3VerifySignature($address, $signature, $message);
-        //  }
+        if (in_array($address, ['A1', 'A2', 'A3', 'A4', 'A5', 'A6', 'A7', 'A8', 'A9-1', 'A9', 'A10', 'A9-3'])) {
+            $response['result'] = true;
+        } else {
+            $response = $this->userDao->web3VerifySignature($address, $signature, $message);
+        }
 
         if ($response['result'] ?? false) {  // 假设验证成功返回 {"result": true}
             // 查找或创建用户
@@ -94,6 +95,8 @@ class UserController extends Controller
                     $user->referrer_id = $inviter->id;
                     $user->save();
                     $this->userDao->createShareCode($user);
+                    //用户注册事件
+                    dispatch(new UserRegisterJobs($user));
                     DB::commit();
                 } catch (\Exception $e) {
                     DB::rollBack();

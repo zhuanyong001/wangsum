@@ -46,6 +46,7 @@ class UserAssetDao
     const TYPE_RECOMMEND_AWARD = 20; //推荐奖励
     const TYPE_TEAM_LEADER_AWARD = 21; //团长返利
     const TYPE_TEAM_LEADER_REFERRAL_FEE = 22; //团长介绍费
+    const TYPE_REGISTER_BONUS = 23; //注册赠送
 
 
     /**
