@@ -76,7 +76,7 @@ class MenuController extends Controller
         // 验证请求数据
         $validatedData = $request->validate([
             'username' => 'required',
-            // 'role_id' => 'required|exists:roles,id', // 确保 role_id 在 roles 表中存在
+            'role_id' => 'required|exists:roles,id', // 确保 role_id 在 roles 表中存在
             'is_super' => 'sometimes|int',
 
         ]);
