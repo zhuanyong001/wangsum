@@ -317,11 +317,16 @@ class UserDao
         }
         $team_ids = $ids_model->pluck('invitee_id');
         $team_ids[] = $user_id;
-        $user_orders = MiningPoolOrder::with('currency')->where(['status' => 1])->whereIn('user_id', $team_ids)->get();
+        $users = User::whereIn('id', $team_ids)->get();
         $usd_amount = 0;
-        foreach ($user_orders as $order) {
-            $usd_amount += $order->amount * $order->currency->price;
+        foreach ($users as $user) {
+            $usd_amount += $user->getPoolAmountUsd();
         }
+        // $user_orders = MiningPoolOrder::with('currency')->where(['status' => 1])->whereIn('user_id', $team_ids)->get();
+        // $usd_amount = 0;
+        // foreach ($user_orders as $order) {
+        //     $usd_amount += $order->amount * $order->currency->price;
+        // }
         return $usd_amount;
     }
     //获取团队时间段内购买矿池的总金额

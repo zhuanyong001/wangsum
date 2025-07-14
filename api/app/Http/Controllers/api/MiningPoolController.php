@@ -72,6 +72,7 @@ class MiningPoolController extends Controller
     public function createOrder(Request $request, UserAssetDao $userAssetDao, UserDao $userDao)
     {
         $data = $request->all();
+        /** @var User $user */
         $user = $request->user();
         $pool = MiningPool::findOrFail($data['mining_pool_id']);
         if (!in_array($data['currency_id'], $pool->coin) || !in_array($data['cycle'], $pool->cycle)) {
@@ -82,6 +83,12 @@ class MiningPoolController extends Controller
         $userAsset = UserAsset::where(['user_id' => $user->id, 'currency_id' => $data['currency_id']])->first();
         if (!$userAsset) {
             throw new ApiError('message.insufficient_balance');
+        }
+
+        if ($currency->name == 'DGFY') {
+            if ($user->getPoolAmountUsd() < 100) {
+                throw new ApiError('message.mining_pool_cycle_limit');
+            }
         }
 
         if ($cycleItem->limit > 0) {
