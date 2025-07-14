@@ -86,8 +86,10 @@ class MiningPoolController extends Controller
         }
 
         if ($currency->code == 'DGFY') {
-            if ($user->getPoolAmountUsd() < 100) {
-                throw new ApiError('message.mining_pool_cycle_limit');
+            $usd = $userAssetDao->getUserSumRunningOrderAmount2USD($user->id);
+            if (intval($usd) < 100) {
+                //请先激活账户
+                throw new ApiError('message.please_activate_account');
             }
         }
 
