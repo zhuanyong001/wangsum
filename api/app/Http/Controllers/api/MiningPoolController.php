@@ -85,7 +85,7 @@ class MiningPoolController extends Controller
             throw new ApiError('message.insufficient_balance');
         }
 
-        if ($currency->name == 'DGFY') {
+        if ($currency->code == 'DGFY') {
             if ($user->getPoolAmountUsd() < 100) {
                 throw new ApiError('message.mining_pool_cycle_limit');
             }
