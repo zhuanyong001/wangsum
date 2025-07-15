@@ -129,9 +129,11 @@ Route::middleware(['auth:sanctum', 'check.token.expiry'])->group(function () {
             Route::post('/get_up_agents', [UserController::class, 'getUpAgent']); // 上级代理
             Route::post('/get_down_agents', [UserController::class, 'getDownAgent']); // 下级代理
             Route::get('/show/{id}', [UserController::class, 'show']);
+            Route::post('/freeze', [UserController::class, 'freezeUser'])->middleware('log.admin:edit,冻结'); //冻结用户
+
             Route::middleware('check.super.admin')->group(function () {
                 Route::post('/deposit', [UserController::class, 'depositAssets'])->middleware('log.admin:edit,充值');
-                Route::post('/freeze', [UserController::class, 'freezeUser'])->middleware('log.admin:edit,冻结'); //冻结用户
+                // Route::post('/freeze', [UserController::class, 'freezeUser'])->middleware('log.admin:edit,冻结'); //冻结用户
                 Route::post('/set_internal', [UserController::class, 'setInternalAccount'])->middleware('log.admin:edit,设置内部账号'); //设置内部账号
                 Route::post('/account/add', [UserController::class, 'addInternalAccount'])->middleware('log.admin:edit,添加虚拟号'); //添加虚拟号
                 Route::post('/set/membership_level', [UserController::class, 'setMembershipLevel'])->middleware('log.admin:edit,预设置会员等级'); //预设置会员等级
