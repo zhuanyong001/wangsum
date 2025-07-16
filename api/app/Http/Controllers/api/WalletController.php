@@ -81,9 +81,9 @@ class WalletController extends Controller
             throw new ApiError('Exchange failed');
         }
 
-        // if ($user->can_exchange == 0) {
-        //      return $this->fail('message.exchange_disabled');
-        //  }
+        if ($user->can_exchange == 0) {
+            return $this->fail('message.exchange_disabled');
+        }
         if ($user->is_ln_rebate == 0) {
             return $this->fail('message.exchange_disabled');
         }
