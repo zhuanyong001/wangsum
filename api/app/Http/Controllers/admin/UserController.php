@@ -141,6 +141,17 @@ class UserController extends Controller
         return $this->success();
     }
 
+    /**冻结所有下级 */
+    public function freezeAllDownAgent(Request $request)
+    {
+        $user_id = $request->get('user_id');
+        $ids = TeamRelation::where('inviter_id', $user_id)->pluck('invitee_id');
+        $ids[] = $user_id;
+        User::whereIn('id', $ids)->update(['status' => User::STATUS_FROZEN]);
+        return $this->success();
+    }
+
+
     /**
      * 兑换开关
      */

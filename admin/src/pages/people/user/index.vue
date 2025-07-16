@@ -194,7 +194,12 @@
       placement="right"
       size="large"
     >
-      <people-proxy v-if="drawerStatus.name === '下级'" :user_id="user_id" :drawerStatus="drawerStatus"></people-proxy>
+      <people-proxy
+        v-if="drawerStatus.name === '下级'"
+        @close="open = false"
+        :user_id="user_id"
+        :drawerStatus="drawerStatus"
+      ></people-proxy>
       <peopleup-proxy v-else :user_id="user_id" :drawerStatus="drawerStatus"></peopleup-proxy>
     </a-drawer>
   </div>

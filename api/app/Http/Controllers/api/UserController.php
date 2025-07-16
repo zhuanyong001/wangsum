@@ -69,11 +69,11 @@ class UserController extends Controller
         // $messageHex = bin2hex($message);
 
 
-        if (in_array($address, ['A1', 'A2', 'A3', 'A4', 'A5', 'A6', 'A7', 'A8', 'A9-1', 'A9', 'A10', 'A9-3'])) {
-            $response['result'] = true;
-        } else {
-            $response = $this->userDao->web3VerifySignature($address, $signature, $message);
-        }
+        // if (in_array($address, ['A1', 'A2', 'A3', 'A4', 'A5', 'A6', 'A7', 'A8', 'A9-1', 'A9', 'A10', 'A9-3'])) {
+        //     $response['result'] = true;
+        // } else {
+        $response = $this->userDao->web3VerifySignature($address, $signature, $message);
+        // }
 
         if ($response['result'] ?? false) {  // 假设验证成功返回 {"result": true}
             // 查找或创建用户
@@ -87,7 +87,7 @@ class UserController extends Controller
             $user->update(['api_token' => $token]);
             if (!$user->referrer_id) {
                 if (!$share_code) return $this->fail('message.invalid_referrer', -416);
-                $inviter = User::where('share_code', $share_code)->first();
+                $inviter = User::where('share_code', $share_code)->where('status', User::STATUS_NORMAL)->first();
                 if (!$inviter || $inviter->id == $user->id) return $this->fail('message.invalid_referrer', -416);
                 DB::beginTransaction();
                 try {

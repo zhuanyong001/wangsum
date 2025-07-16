@@ -22,6 +22,7 @@
         { title: '余额', dataIndex: 'balance' },
         { title: '会员等级', dataIndex: ['invitee', 'membership', 'name'] },
         { title: '直属下级', dataIndex: 'l1_count' },
+        { title: '冻结状态', dataIndex: 'status' },
 
         // { title: '操作', dataIndex: 'action' },
       ],
@@ -29,9 +30,6 @@
     null,
     'POST_JSON'
   );
-  const { LooksubordinateProxy } = useEdit({ getData });
-  const { recharge } = Recharge({ getData });
-  const { freeze } = freezes({ getData });
   const props = defineProps({
     user_id: String | Number,
   });
@@ -47,29 +45,6 @@
     { immediate: true }
   );
 
-  const formConfig = computed(() => [
-    {
-      label: '代理层级',
-      key: 'level',
-      type: 'number',
-      // opts: [
-      //   { label: '1级代理', value: 1 },
-      //   { label: '2级代理', value: 2 },
-      //   { label: '3级代理', value: 3 },
-      //   { label: '4级代理', value: 4 },
-      //   { label: '5级代理', value: 5 },
-      // ],
-    },
-  ]);
-
-  const finish = (e) => {
-    params.page = 1;
-    queryParams.value = {
-      ...queryParams.value,
-      ...e,
-    };
-    getData(queryParams.value);
-  };
   const getChildren = (expanded, record) => {
     console.log('====>>expanded', expanded, record);
     usePost('/web3/members/get_down_agents', { user_id: record.invitee_id, level: 1 }).then((res) => {
@@ -79,11 +54,24 @@
       });
     });
   };
+  const emit = defineEmits(['close']);
+  const freezeAll = () => {
+    usePost('/web3/members/freeze_all_down_agent', { user_id: props.user_id }).then((res) => {
+      if (res.code === 200) {
+        message.success('冻结成功');
+        getData(queryParams.value);
+      }
+      emit('close');
+    });
+  };
 </script>
 <template>
   <div>
     <!-- <query-from :formConfig="formConfig" v-model="queryParams" @finish="finish"></query-from> -->
-    <sun-label label="总数">{{ pagination.total }}</sun-label>
+    <div style="margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center">
+      <sun-label label="总数">{{ pagination.total }}</sun-label>
+      <a-button @click="freezeAll">冻结整条线的下级</a-button>
+    </div>
     <a-table
       size="small"
       :columns="columns"
@@ -97,6 +85,9 @@
       <template #bodyCell="{ column, text, record }">
         <template v-if="column.dataIndex === 'balance'">
           {{ calculateTotalValue(record.assets) }}
+        </template>
+        <template v-if="column.dataIndex === 'status'">
+          <a-tag :color="record.status === 1 ? 'green' : 'red'">{{ record.status === 1 ? '正常' : '冻结' }}</a-tag>
         </template>
         <template v-if="column.dataIndex === 'action'">
           <a-space>

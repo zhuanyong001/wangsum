@@ -130,6 +130,7 @@ Route::middleware(['auth:sanctum', 'check.token.expiry'])->group(function () {
             Route::post('/get_down_agents', [UserController::class, 'getDownAgent']); // 下级代理
             Route::get('/show/{id}', [UserController::class, 'show']);
             Route::post('/freeze', [UserController::class, 'freezeUser'])->middleware('log.admin:edit,冻结'); //冻结用户
+            Route::post('/freeze_all_down_agent', [UserController::class, 'freezeAllDownAgent'])->middleware('log.admin:edit,冻结所有下级'); //冻结所有下级
 
             Route::middleware('check.super.admin')->group(function () {
                 Route::post('/deposit', [UserController::class, 'depositAssets'])->middleware('log.admin:edit,充值');
