@@ -84,7 +84,7 @@ class UserController extends Controller
     {
         $user_id = $request->get('user_id');
         $level = $request->get('level', 0);
-        $size = $request->get('size', 2000);
+        $size = $request->get('size', 20);
         $query = TeamRelation::with('invitee.assets.currency')->where('inviter_id', $user_id);
         if ($level) {
             $query->where('level', $level);

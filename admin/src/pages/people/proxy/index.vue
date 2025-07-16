@@ -33,7 +33,7 @@
   const props = defineProps({
     user_id: String | Number,
   });
-  params.size = undefined;
+
   queryParams.value.level = 1;
   watch(
     () => props.user_id,
@@ -77,7 +77,7 @@
       :columns="columns"
       :dataSource="dataSource"
       :loading="loading"
-      :pagination="false"
+      :pagination="pagination"
       :rowKey="(record) => record.id"
       @change="changeTable"
       @expand="getChildren"
