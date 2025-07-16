@@ -148,6 +148,11 @@ class UserController extends Controller
         $ids = TeamRelation::where('inviter_id', $user_id)->pluck('invitee_id');
         $ids[] = $user_id;
         User::whereIn('id', $ids)->update(['status' => User::STATUS_FROZEN]);
+        //删除所有token
+        foreach ($ids as $id) {
+            $user = User::find($id);
+            $user->tokens()->delete();
+        }
         return $this->success();
     }
 
