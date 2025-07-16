@@ -310,24 +310,29 @@ class UserDao
     {
         //下8代节点金额
 
-        $ids_model = TeamRelation::whereHas('invitee', function ($query) {
-            $query->where('status', User::STATUS_NORMAL);
-        })->where('inviter_id', $user_id);
-        if ($deep) {
-            $ids_model = $ids_model->where('level', '<=', $deep);
+        $cache_key = 'team_pool_amount_usd_' . $user_id . '_' . $deep;
+        $usd_amount = Cache::get($cache_key);
+        if ($usd_amount === null) {
+            $ids_model = TeamRelation::whereHas('invitee', function ($query) {
+                $query->where('status', User::STATUS_NORMAL);
+            })->where('inviter_id', $user_id);
+
+            if ($deep) {
+                $ids_model = $ids_model->where('level', '<=', $deep);
+            }
+
+            $team_ids = $ids_model->pluck('invitee_id');
+            $team_ids[] = $user_id;
+
+            $users = User::whereIn('id', $team_ids)->get();
+            $usd_amount = 0;
+            foreach ($users as $user) {
+                $usd_amount += $user->getPoolAmountUsd();
+            }
+            //缓存15分钟
+            Cache::put($cache_key, $usd_amount, 15 * 60);
         }
-        $team_ids = $ids_model->pluck('invitee_id');
-        $team_ids[] = $user_id;
-        $users = User::whereIn('id', $team_ids)->get();
-        $usd_amount = 0;
-        foreach ($users as $user) {
-            $usd_amount += $user->getPoolAmountUsd();
-        }
-        // $user_orders = MiningPoolOrder::with('currency')->where(['status' => 1])->whereIn('user_id', $team_ids)->get();
-        // $usd_amount = 0;
-        // foreach ($user_orders as $order) {
-        //     $usd_amount += $order->amount * $order->currency->price;
-        // }
+
         return $usd_amount;
     }
     //获取团队时间段内购买矿池的总金额
@@ -416,14 +421,19 @@ class UserDao
 
         $config = $level_config[$level] ?? null;
         if (!$config) return false;
-        $user = User::find($user_id);
-        if (!$user) return false;
-        $userUseMoney = $user->getPoolAmountUsd();
-        $directTeamActiveUserCount = self::getDirectTeamActiveUserCount($user_id);
-        if ($userUseMoney >= $config['money'] && $directTeamActiveUserCount >= $config['count']) {
-            return true;
-        }
-        return false;
+
+        $cacheKey = 'is_meet_recommend_award:' . $user_id . '_' . $level;
+        $result = Cache::remember($cacheKey, 60 * 15, function () use ($user_id, $config) {
+            $user = User::find($user_id);
+            if (!$user) return false;
+            $userUseMoney = $user->getPoolAmountUsd();
+            $directTeamActiveUserCount = self::getDirectTeamActiveUserCount($user_id);
+            if ($userUseMoney >= $config['money'] && $directTeamActiveUserCount >= $config['count']) {
+                return true;
+            }
+            return false;
+        });
+        return $result;
     }
 
 
