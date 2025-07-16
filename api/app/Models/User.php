@@ -241,7 +241,7 @@ class User extends Authenticatable
             return 0;
         }
         $cache_key = 'user_pool_amount_usd:' . $this->id;
-        $usd = Cache::remember($cache_key, 60 * 5, function () {
+        $usd = Cache::remember($cache_key, 60 * 15, function () {
             $dao = new UserAssetDao();
             return $dao->getUserSumRunningOrderAmount2USD($this->id);
         });

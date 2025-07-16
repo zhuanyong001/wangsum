@@ -13,6 +13,7 @@ use App\Models\WithdrawalOrder;
 use App\Services\TronService;
 use Illuminate\Support\Facades\DB;
 use Exception;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
@@ -385,12 +386,16 @@ class UserDao
     public static function getDirectTeamActiveUserCount($user_id)
     {
         $l1_users = User::where('referrer_id', $user_id)->get();
-        $count = 0;
-        foreach ($l1_users as $l1_user) {
-            /** @var User $l1_user  */
-            if ($l1_user->getPoolAmountUsd() < 100) continue;
-            $count++;
-        }
+        $cacheKey = 'direct_team_active_count:' . $user_id;
+        $count = Cache::remember($cacheKey, 60 * 15, function () use ($l1_users) {
+            $count = 0;
+            foreach ($l1_users as $l1_user) {
+                /** @var User $l1_user  */
+                if ($l1_user->getPoolAmountUsd() < 100) continue;
+                $count++;
+            }
+            return $count;
+        });
         return $count;
     }
 
