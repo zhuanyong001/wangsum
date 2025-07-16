@@ -87,7 +87,9 @@
           {{ calculateTotalValue(record.assets) }}
         </template>
         <template v-if="column.dataIndex === 'status'">
-          <a-tag :color="record.status === 1 ? 'green' : 'red'">{{ record.status === 1 ? '正常' : '冻结' }}</a-tag>
+          <a-tag :color="record.invitee?.status === 1 ? 'green' : 'red'">{{
+            record.invitee?.status === 1 ? '正常' : '冻结'
+          }}</a-tag>
         </template>
         <template v-if="column.dataIndex === 'action'">
           <a-space>
