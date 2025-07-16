@@ -390,7 +390,7 @@ class UserDao
 
     public static function getDirectTeamActiveUserCount($user_id)
     {
-        $l1_users = User::where('referrer_id', $user_id)->get();
+        $l1_users = User::where('referrer_id', $user_id)->where('status', User::STATUS_NORMAL)->get();
         $cacheKey = 'direct_team_active_count:' . $user_id;
         $count = Cache::remember($cacheKey, 60 * 15, function () use ($l1_users) {
             $count = 0;
