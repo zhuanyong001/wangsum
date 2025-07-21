@@ -216,7 +216,7 @@ class MiningPoolController extends Controller
         if ($request->daily_rate <= 0) {
             return $this->error('日利率错误');
         }
-        if ($request->amount <= 0) {
+        if ($request->amount < 0) {
             return $this->error('金额错误');
         }
         if ($request->trial_amount < 0) {
