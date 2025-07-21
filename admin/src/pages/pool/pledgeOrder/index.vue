@@ -12,6 +12,7 @@
       { title: '用户', dataIndex: ['user', 'share_code'], customRender: renderUser },
       { title: '币种代码', dataIndex: 'coin_code' },
       { title: '金额', dataIndex: 'amount' },
+      { title: '体验金', dataIndex: 'trial_amount' },
       { title: '日利率', dataIndex: 'daily_rate' },
       { title: '结算基数', dataIndex: 'settlement_base' },
       { title: '总奖励', dataIndex: 'total_award' },
