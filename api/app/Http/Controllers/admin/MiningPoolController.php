@@ -240,6 +240,7 @@ class MiningPoolController extends Controller
             'expire_time' => date('Y-m-d 23:59:59', strtotime('+' .  $request->cycle . ' day', time())),
             'type' => MiningPoolOrder::TYPE_FIXED_DEPOSIT, // 定期
             'status' => MiningPoolOrder::STATUS_RUNING, // 运行
+            'cate' => $request->cate,
 
         ]);
 
