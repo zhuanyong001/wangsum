@@ -35,7 +35,8 @@ class MiningPoolOrder extends Model
         "cate",
         "df_currency_id",
         "df_rate",
-        "df_amount"
+        "df_amount",
+        "trial_amount"
     ];
 
     public function miningPool()

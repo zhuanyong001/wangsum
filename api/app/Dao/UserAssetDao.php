@@ -203,7 +203,7 @@ class UserAssetDao
 
             $userAsset = UserAsset::where(['user_id' => $order->user_id, 'currency_id' => $order->currency_id])->first();
             //本金结算
-            $this->updateUserAsset($userAsset, $order->amount, $unfreeze_type, '质押提现');
+            if ($order->amount > 0) $this->updateUserAsset($userAsset, $order->amount, $unfreeze_type, '质押提现');
             //收益结算
             if ($order->total_award > 0 && $order->cate == MiningPool::CATE_POOL) {
                 $this->updateUserAsset($userAsset, $order->total_award, self::TYPE_MP_AWARD, '质押收益');
@@ -237,8 +237,8 @@ class UserAssetDao
         DB::transaction(function () use ($order) {
             $prefix = get_system_config('mining_pool_award_prefix', '');
             //code...
-            $settlement_base = $order->settlement_base;
-            $award = $settlement_base * $order->daily_rate;
+            $settlement_base = bcadd($order->settlement_base, $order->trial_amount, 8);
+            $award = bcmul($settlement_base, $order->daily_rate, 8);
             $order->total_award += $award;
             if ($order->compound == 1 && $order->cate == MiningPool::CATE_POOL) {
                 //复利
@@ -255,7 +255,10 @@ class UserAssetDao
             //上级返利
             //按收益结算
             $base_money =  $award;
-            dispatch(new ProcessMinigPoolOrderReferrerRebate($order, $base_money));
+            if ($order->mining_pool_id) {
+                dispatch(new ProcessMinigPoolOrderReferrerRebate($order, $base_money));
+            }
+
             //event(new minigPoolOrderReferrerRebateEvent($order));
 
         });

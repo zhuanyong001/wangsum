@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Currency;
 use App\Models\MiningPool;
 use App\Models\MiningPoolAwardLog;
 use App\Models\MiningPoolCycleItem;
 use App\Models\MiningPoolOrder;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -182,5 +184,65 @@ class MiningPoolController extends Controller
         $miningPoolCycleItem = MiningPoolCycleItem::findOrFail($id);
         $miningPoolCycleItem->delete();
         return $this->success();
+    }
+
+    //后台创建赠送订单
+    public function createTrialMiningPoolOrder(Request $request)
+    {
+        $request->validate([
+            'share_code' => 'required|string',
+            'cycle' => 'required|integer',
+            'trial_amount' => 'required|numeric',
+            'amount' => 'required|numeric',
+            'currency_id' => 'required|integer',
+            'daily_rate' => 'required|numeric',
+            'cate' => 'required|in:1,2'
+        ]);
+
+        $user = User::where('share_code', $request->share_code)->first();
+        if (!$user) {
+            return $this->error('用户不存在');
+        }
+        $currency = Currency::find($request->currency_id);
+        if (!$currency) {
+            return $this->error('币种不存在');
+        }
+        if (!$request->cycle) {
+            return $this->error('周期错误');
+        }
+        if ($request->trial_amount == 0 && $request->amount == 0) {
+            return $this->error('金额错误');
+        }
+        if ($request->daily_rate <= 0) {
+            return $this->error('日利率错误');
+        }
+        if ($request->amount <= 0) {
+            return $this->error('金额错误');
+        }
+        if ($request->trial_amount < 0) {
+            return $this->error('体验金错误');
+        }
+
+
+
+
+        $order = MiningPoolOrder::create([
+            'order_no' => ['A', 'MP', 'DP'][$request->cate] . date('YmdHis') . mt_rand(1000, 9999),
+            'mining_pool_id' => 0,
+            'user_id' => $user->id,
+            'coin_code' => $currency->code,
+            'cycle' => $request->cycle,
+            'amount' => $request->amount,
+            'currency_id' => $request->currency_id,
+            'trial_amount' => $request->trial_amount, //体验金
+            'daily_rate' => $request->daily_rate,
+            'compound' => 0, //是否复利
+            'expire_time' => date('Y-m-d 23:59:59', strtotime('+' .  $request->cycle . ' day', time())),
+            'type' => MiningPoolOrder::TYPE_FIXED_DEPOSIT, // 定期
+            'status' => MiningPoolOrder::STATUS_RUNING, // 运行
+
+        ]);
+
+        return $this->success($order);
     }
 }

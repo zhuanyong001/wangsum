@@ -1,31 +1,26 @@
 import modal from '@/components/dy/Modal/modal.js';
-import {computed} from 'vue'
-import { useSelectStore } from '@/store/selectOpts'
+import { computed } from 'vue';
+import { useSelectStore } from '@/store/selectOpts';
 
-const store = useSelectStore()
-export const pledgeTypes = computed(() => store.pledge_types)
+const store = useSelectStore();
+export const pledgeTypes = computed(() => store.pledge_types);
+export const currencyList = computed(() => store.currency_list);
+export const types = computed(() => store.poolTypes);
 
 export const useEdit = ({ getData }) => {
-  const title = '会员等级';
+  const title = '赠送订单';
   const formConfig = [
-    { label: '会员名称', key: 'name', type: 'text', desc: '' },
-    { label: '等级', key: 'level', type: 'number', desc: '' },
-    { label: '最低矿池金额', key: 'pool_amount_usdt', type: 'number', desc: '' },
-    { label: '下级收益返利率', key: 'participation_commission', type: 'number', desc: '' },
-    { label: '评级收益返利率', key: 'equal_level_commission', type: 'number', desc: '' },
-    { label: '直推等级人数要求', key: 'direct_lower_levels', type: 'number', desc: '' },
-    { label: '伞下人数要求', key: 'umbrella_people_count', type: 'number', desc: '' },
-    { label: '备注', key: 'remarks', type: 'text', desc: '' },
-    { label: '状态', key: 'status', type: 'switch', desc: '', default: 1 },
+    { label: '会员', key: 'share_code', type: 'text', desc: '' },
+    { label: '周期', key: 'cycle', type: 'number', desc: '' },
+    { label: '金额', key: 'amount', type: 'number', desc: '结束时，返还的本金', default: 0 },
+    { label: '体验金', key: 'trial_amount', type: 'number', desc: '结束时不返回', default: 0 },
+    { label: '币种', key: 'currency_id', type: 'select', desc: '', opts: currencyList.value },
+    { label: '日利率', key: 'daily_rate', type: 'number', desc: '' },
+    { label: '类型', key: 'cate', type: 'select', opts: types.value, default: 1 },
   ];
   const submit = (formData) => {
-    let url = '/web3/mining-pools/order_list/';
+    let url = '/web3/mining-pools/create_trial_mining_pool_order';
     let method = 'POST_JSON';
-
-    if (formData.value.id) {
-      url = `/web3/mining-pools/order_list/${formData.value.id}`;
-      method = 'PUT_JSON';
-    }
     useHttp(url, method, { ...formData.value })
       .then((res) => {
         if (res.code === 200) {
@@ -40,6 +35,15 @@ export const useEdit = ({ getData }) => {
       });
   };
   const addNew = (form = {}) => {
+    const formConfig = [
+      { label: '用户', key: 'share_code', type: 'text', desc: '' },
+      { label: '周期', key: 'cycle', type: 'number', desc: '' },
+      { label: '金额', key: 'amount', type: 'number', desc: '结束时，返还的本金', default: 0 },
+      { label: '体验金', key: 'trial_amount', type: 'number', desc: '结束时不返回', default: 0 },
+      { label: '币种', key: 'currency_id', type: 'select', desc: '', opts: currencyList.value },
+      { label: '日利率', key: 'daily_rate', type: 'number', desc: '' },
+      { label: '类型', key: 'cate', type: 'select', opts: types.value, default: 1 },
+    ];
     modal
       .open({
         props: {

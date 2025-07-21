@@ -1,6 +1,6 @@
 <script setup>
   import { useTable } from '@/composables/useTable';
-  import { pledgeTypes } from './useEdit';
+  import { pledgeTypes, useEdit } from './useEdit';
   import { useUserDetail } from '@/pages/people/userDetails.js';
   import { useSelectStore } from '@/store/selectOpts';
   const { details, renderUser } = useUserDetail();
@@ -24,7 +24,7 @@
       // { title: '更新时间', dataIndex: 'updated_at' }
     ],
   });
-  // const { addNew } = useEdit({ getData });
+  const { addNew } = useEdit({ getData });
 
   const props = defineProps({
     user_id: {
@@ -141,16 +141,16 @@
     :rowKey="(record) => record.id"
     @change="changeTable"
   >
-    <!-- <template #title>
+    <template #title>
       <div class="flex justify-between pr-4">
         <a-button type="primary" @click="addNew()">
           <template #icon>
             <PlusOutlined />
           </template>
-          新增</a-button
+          赠送</a-button
         >
       </div>
-    </template> -->
+    </template>
     <template #bodyCell="{ column, text, record }">
       <template v-if="column.dataIndex === 'status'">
         <a-space>

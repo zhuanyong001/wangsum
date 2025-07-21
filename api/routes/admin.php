@@ -83,6 +83,9 @@ Route::middleware(['auth:sanctum', 'check.token.expiry'])->group(function () {
         //矿池
         Route::prefix('/mining-pools')->group(
             function () {
+                //赠送体验订单
+                Route::post('/create_trial_mining_pool_order', [MiningPoolController::class, 'createTrialMiningPoolOrder'])->middleware('log.admin:edit,新增矿池');
+
                 Route::get('/order_list', [MiningPoolController::class, 'getOrderList']);
                 Route::any('/order_award_list', [MiningPoolController::class, 'getOrderAwardList']);
                 Route::get('/cycle_item/list', [MiningPoolController::class, 'getMiningPoolCycleItemList']);
