@@ -237,7 +237,7 @@ class MiningPoolController extends Controller
             'trial_amount' => $request->trial_amount, //体验金
             'daily_rate' => $request->daily_rate,
             'compound' => 0, //是否复利
-            'expire_time' => date('Y-m-d 23:59:59', strtotime('+' .  $request->cycle . ' day', time())),
+            'expire_time' => date('Y-m-d 00:00:00', strtotime('+' .  $request->cycle . ' day', time())),
             'type' => MiningPoolOrder::TYPE_FIXED_DEPOSIT, // 定期
             'status' => MiningPoolOrder::STATUS_RUNING, // 运行
             'cate' => $request->cate,
