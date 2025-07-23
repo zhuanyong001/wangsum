@@ -541,7 +541,6 @@ class UserAssetDao
             }
 
             //推荐奖励 最多返8代，满足条件的
-            $start_time = microtime(true);
             if (UserDao::isMeetRecommendAward($referrer->id, $l)) {
                 $tj_rebate = bcmul($base_amount, 0.05, 8);
                 echo $referrer->id . "推荐奖励:" . $tj_rebate . PHP_EOL;
@@ -550,9 +549,7 @@ class UserAssetDao
                     $this->addMiningPoolAwardLog($order->id, $referrer->id, $tj_rebate, $order->user_id, $l, 'TJ');
                 }
             }
-            $end_time = microtime(true);
-            $execution_time = ($end_time - $start_time) * 1000; // 转换为毫秒
-            echo "推荐奖励计算耗时: " . $execution_time . " 毫秒" . PHP_EOL;
+
 
             $l++;
             $target_user = $referrer;
@@ -614,7 +611,9 @@ class UserAssetDao
     public function getUserSumRunningOrderAmount2USD($user_id)
     {
         $orders = MiningPoolOrder::where(['user_id' => $user_id, 'status' => MiningPoolOrder::STATUS_RUNING])->with('currency:name,id,code,price')->get();
-        return $this->amountListToTotalUSD($orders);
+        $res = $this->amountListToTotalUSD($orders);
+        unset($orders);
+        return $res;
     }
 
 

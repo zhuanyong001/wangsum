@@ -324,7 +324,7 @@ class UserDao
             $team_ids = $ids_model->pluck('invitee_id');
             $team_ids[] = $user_id;
 
-            $users = User::whereIn('id', $team_ids)->get();
+            $users = User::whereIn('id', $team_ids)->select('id')->get();
             $usd_amount = 0;
             foreach ($users as $user) {
                 $usd_amount += $user->getPoolAmountUsd();
