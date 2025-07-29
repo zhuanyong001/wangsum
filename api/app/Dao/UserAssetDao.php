@@ -145,14 +145,14 @@ class UserAssetDao
                 $order =  MiningPoolOrder::create($data);
                 //存款订单 上级返利
                 if ($miningPool->cate == MiningPool::CATE_DEP) {
-                    //$this->PoolOrderRebate($order);
-                    $this->PoolOrderRebateLN($order);
+
+                    // $this->PoolOrderRebateLN($order);
                     //空投
-                    MiningPoolOrderDao::makeAirDrop($order);
+                    //  MiningPoolOrderDao::makeAirDrop($order);
                 }
 
                 //团长返佣
-                $this->teamLeaderRebate($order, $cycleItem);
+                //  $this->teamLeaderRebate($order, $cycleItem);
             } catch (Exception $e) {
 
                 if ($e instanceof ApiError) {

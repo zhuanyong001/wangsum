@@ -252,7 +252,6 @@ class UserDao
 
     public function getTeamIds($user_id)
     {
-
         $team_ids = TeamRelation::whereHas('invitee', function ($query) {
             $query->where('status', User::STATUS_NORMAL);
         })->where('inviter_id', $user_id)->pluck('invitee_id'); //包含自己

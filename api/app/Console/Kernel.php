@@ -17,7 +17,7 @@ class Kernel extends ConsoleKernel
     {
 
         // $schedule->command('inspire')->hourly();
-        $schedule->command('mining_pool_award')->daily();
+        // $schedule->command('mining_pool_award')->daily();
         $schedule->command('loan_pool_interest')->daily();
         $schedule->command('coin-price-query')->everyMinute();
         $schedule->command('validate-deposit-order')->everyMinute();
